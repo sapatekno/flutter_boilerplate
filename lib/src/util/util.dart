@@ -1,1 +1,1 @@
-abstract class Util {}
+class Util {}

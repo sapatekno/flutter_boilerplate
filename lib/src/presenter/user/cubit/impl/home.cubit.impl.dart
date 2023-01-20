@@ -36,9 +36,21 @@ class HomeCubitImpl extends Cubit<StateApp> implements HomeCubit {
         currentListUser.addAll(data.data!);
 
         emit(DataState<List<User>>(currentListUser));
-        if (listState == ListState.refresh) emit(DataState<ListState>(ListState.refreshDone));
-        if (listState == ListState.load) emit(DataState<ListState>(ListState.loadDone));
+        if (listState == ListState.refresh)
+          emit(DataState<ListState>(ListState.refreshDone));
+        if (listState == ListState.load)
+          emit(DataState<ListState>(ListState.loadDone));
       },
     );
+  }
+
+  @override
+  Future<void> close() {
+    return super.close();
+  }
+
+  @override
+  void cancelRequest() {
+    print('i am closed');
   }
 }

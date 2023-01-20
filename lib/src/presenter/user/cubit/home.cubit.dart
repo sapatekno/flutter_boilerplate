@@ -10,4 +10,6 @@ abstract class HomeCubit extends Cubit<StateApp> {
   int get currentPage;
 
   int get currentTotalPage;
+
+  void cancelRequest();
 }

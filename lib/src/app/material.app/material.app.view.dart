@@ -1,3 +1,4 @@
+import 'package:alice/alice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,12 +11,14 @@ class MaterialAppView extends StatelessWidget {
   MaterialAppView({Key? key}) : super(key: key);
 
   final MaterialAppCubit materialAppCubit = sl.get<MaterialAppCubit>();
+  final Alice alice = sl.get<Alice>();
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MaterialAppCubit, StateApp>(
       builder: (context, state) {
         return MaterialApp(
+          navigatorKey: alice.getNavigatorKey(),
           title: 'Flutter Boilerplate',
           theme: ThemeData(
             primarySwatch: Colors.blue,

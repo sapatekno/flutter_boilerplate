@@ -13,9 +13,9 @@ class ReqresApiImpl extends ReqresApi {
   String pathUser = 'users';
 
   Dio get client {
-    Dio dio = http.getClient();
-    dio.options.baseUrl = 'https://reqres.in/api/';
-    return dio;
+    Dio client = http.getClient();
+    client.options.baseUrl = 'https://reqres.in/api/';
+    return client;
   }
 
   @override
