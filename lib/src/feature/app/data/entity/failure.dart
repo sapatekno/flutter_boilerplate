@@ -1,6 +1,7 @@
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_boilerplate/src/util/string.util.dart';
 
 part 'failure.g.dart';
 
@@ -46,4 +47,17 @@ class Failure extends Equatable {
 
   @override
   List<Object?> get props => [isProcessed, message, error, stackTrace];
+
+  static Failure proccess(Failure data) {
+    if (data.isProcessed == true) return data;
+    var result = data.copyWith(isProcessed: true);
+
+    if (result.error is DioError) {
+      var dioError = result.error as DioError;
+      String message = dioError.response?.data['message'] ?? dioError.message;
+      result = result.copyWith(message: message.toCapitalize());
+    }
+
+    return result;
+  }
 }

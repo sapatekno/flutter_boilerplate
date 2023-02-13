@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_boilerplate/src/feature/app/presenter/widget/dialog.widget.dart';
+import 'package:flutter_boilerplate/src/router/go.router.dart';
 import 'package:flutter_boilerplate/src/util/string.util.dart';
 import 'package:flutter_gen/gen_l10n/app_local.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../../config/config.dart';
@@ -25,7 +27,7 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       body: BlocConsumer<LoginState, MainState>(
         bloc: loginState..getToken(),
-        listenWhen: (prev, current) => current is AlertState,
+        listenWhen: (prev, current) => current is AlertState || current is GoToHomeState,
         listener: (context, state) => onListener(context, state),
         buildWhen: (prev, state) => state is LoadState || state is DataState<bool> || state is FailState,
         builder: (context, state) {
@@ -44,6 +46,7 @@ class LoginPage extends StatelessWidget {
               ),
             );
           }
+
           return Container();
         },
       ),
@@ -143,8 +146,10 @@ class LoginPage extends StatelessWidget {
 
   onListener(BuildContext context, MainState state) {
     if (state is AlertState<Failure>) {
+      print(state.data);
       String description = AppLocalizations.of(context)!.noData;
       if (state.data.message != null) {
+        description = state.data.message!;
         if (state.data.message == 'fromNoInternetConnection') description = AppLocalizations.of(context)!.failNoInternet;
       }
       showInfoDialog(
@@ -154,5 +159,7 @@ class LoginPage extends StatelessWidget {
         AppLocalizations.of(context)!.ok.toTitleCase(),
       );
     }
+
+    if (state is GoToHomeState) context.go(pathHome);
   }
 }

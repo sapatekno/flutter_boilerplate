@@ -1,5 +1,7 @@
 import 'package:alice/alice.dart';
 import 'package:flutter_boilerplate/src/feature/app/data/source/local/client/local.client.dart';
+import 'package:flutter_boilerplate/src/feature/app/data/source/local/prefs/impl/user.prefs.impl.dart';
+import 'package:flutter_boilerplate/src/feature/app/data/source/local/prefs/user.prefs.dart';
 import 'package:flutter_boilerplate/src/util/internet.util.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,6 +32,9 @@ Future<void> init(Config config) async {
   sl.registerSingleton<HttpClient>(HttpClient(sl()));
   sl.registerSingleton<SharedPreferences>(await LocalClient().client);
 
+  /// * Preferences
+  sl.registerLazySingleton<UserPrefs>(() => UserPrefsImpl(sl()));
+
   /// * API
   sl.registerLazySingleton<SurveyAmiApi>(() => SurveyAmiApiImpl(sl(), sl()));
 
@@ -38,5 +43,5 @@ Future<void> init(Config config) async {
 
   /// * Cubit (State)
   /// sl.registerSingleton<MaterialAppCubit>(MaterialAppCubit());
-  sl.registerFactory<LoginState>(() => LoginState(sl(), sl()));
+  sl.registerFactory<LoginState>(() => LoginState(sl(), sl(), sl()));
 }

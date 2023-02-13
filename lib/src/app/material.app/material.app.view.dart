@@ -1,22 +1,18 @@
-import 'package:alice/alice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_local.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:form_builder_validators/localization/l10n.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../feature/auth/auth.login/presenter/page/login.page.dart';
-import '../../router/sl.router.dart';
+import '../../router/go.router.dart';
 
 class MaterialAppView extends StatelessWidget {
-  MaterialAppView({Key? key}) : super(key: key);
-
-  final Alice alice = sl.get<Alice>();
+  const MaterialAppView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      navigatorKey: alice.getNavigatorKey(),
+    return MaterialApp.router(
+      routerConfig: goRouter,
       localizationsDelegates: const [
         AppLocalizations.delegate,
         FormBuilderLocalizations.delegate,
@@ -32,7 +28,6 @@ class MaterialAppView extends StatelessWidget {
         primarySwatch: Colors.indigo,
         inputDecorationTheme: const InputDecorationTheme(border: OutlineInputBorder()),
       ),
-      home: LoginPage(),
     );
   }
 }

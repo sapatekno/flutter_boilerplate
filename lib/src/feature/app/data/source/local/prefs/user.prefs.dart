@@ -1,5 +1,10 @@
+import 'package:dartz/dartz.dart';
+
+import '../../../../../auth/auth.login/data/entity/response/login.res.e.dart';
 import 'prefs.dart';
 
 abstract class UserPrefs extends Prefs {
-  void setUser(String data);
+  Future<bool> setUser(LoginResE data);
+
+  Either<dynamic, LoginResE> getUser();
 }
