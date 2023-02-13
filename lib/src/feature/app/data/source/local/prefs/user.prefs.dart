@@ -7,4 +7,6 @@ abstract class UserPrefs extends Prefs {
   Future<bool> setUser(LoginResE data);
 
   Either<dynamic, LoginResE> getUser();
+
+  Future<bool> removeUser();
 }

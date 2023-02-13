@@ -1,4 +1,4 @@
-package com.sapatekno.flutter_boilerplate
+package id.co.plniconplus.surveyami
 
 import io.flutter.embedding.android.FlutterActivity
 

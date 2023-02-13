@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
-import 'package:flutter_boilerplate/src/feature/auth/auth.login/data/entity/response/login.res.e.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../../../router/sl.router.dart';
 import '../../../../../../../util/crypto.util.dart';
+import '../../../../../../auth/auth.login/data/entity/response/login.res.e.dart';
 import '../user.prefs.dart';
 
 class UserPrefsImpl implements UserPrefs {
@@ -20,7 +20,8 @@ class UserPrefsImpl implements UserPrefs {
 
   @override
   Future<bool> setUser(LoginResE data) async {
-    return await client.setString(keyUser, crypto.encrypt(jsonEncode(data.toJson())));
+    String source = jsonEncode(data);
+    return await client.setString(keyUser, crypto.encrypt(source));
   }
 
   @override
@@ -29,8 +30,12 @@ class UserPrefsImpl implements UserPrefs {
     if (source == null) {
       return const Left(null);
     } else {
-      var result = LoginResE.fromJson(crypto.decrypt(source) as dynamic);
+      source = crypto.decrypt(source);
+      var result = LoginResE.fromJson(jsonDecode(source));
       return Right(result);
     }
   }
+
+  @override
+  Future<bool> removeUser() async => await client.remove(keyUser);
 }

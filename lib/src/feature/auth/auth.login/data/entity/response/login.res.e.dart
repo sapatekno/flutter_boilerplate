@@ -1,7 +1,8 @@
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_boilerplate/src/feature/auth/auth.login/data/model/response/login.res.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import '../../model/response/login.res.dart';
 
 part 'login.res.e.g.dart';
 

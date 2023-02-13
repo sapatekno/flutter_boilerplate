@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_boilerplate/src/feature/app/data/entity/failure.dart';
-import 'package:flutter_boilerplate/src/feature/app/data/model/response/base.res.dart';
-import 'package:flutter_boilerplate/src/feature/auth/auth.login/data/entity/request/login.req.e.dart';
-import 'package:flutter_boilerplate/src/feature/auth/auth.login/data/entity/response/login.res.e.dart';
-import 'package:flutter_boilerplate/src/feature/auth/auth.login/data/model/response/login.res.dart';
 
+import '../../../../app/data/entity/failure.dart';
+import '../../../../app/data/model/response/base.res.dart';
 import '../../../../app/data/source/network/api/survey_ami.api.dart';
+import '../../../auth.login/data/entity/request/login.req.e.dart';
+import '../../../auth.login/data/entity/response/login.res.e.dart';
+import '../../../auth.login/data/model/response/login.res.dart';
 import '../auth.repo.dart';
 
 class AuthRepoImpl implements AuthRepo {

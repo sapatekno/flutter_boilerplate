@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sapatekno.flutter_boilerplate">
+    package="id.co.plniconplus.surveyami">
 
     <application
         android:name="${applicationName}"

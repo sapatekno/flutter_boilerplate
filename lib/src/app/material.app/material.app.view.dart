@@ -22,7 +22,8 @@ class MaterialAppView extends StatelessWidget {
       ],
       supportedLocales: AppLocalizations.supportedLocales,
       locale: const Locale('id'),
-      title: 'Flutter Boilerplate',
+      title: 'Survei AMI',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         textTheme: GoogleFonts.ubuntuTextTheme(),
         primarySwatch: Colors.indigo,

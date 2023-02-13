@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../config/config.dart';
@@ -31,7 +32,9 @@ class LoginState extends Cubit<MainState> {
     var user = userPrefs.getUser();
     user.fold((nodata) {
       emit(DataState(true));
-    }, (data) {});
+    }, (data) {
+      emit(GoToHomeState());
+    });
   }
 
   void doLogin(String user, String pass) async {
@@ -51,8 +54,15 @@ class LoginState extends Cubit<MainState> {
       emit(DataState(true));
       emit(AlertState(Failure.proccess(failure)));
       return;
-    }, (data) {
-      emit(GoToHomeState());
+    }, (data) async {
+      bool saveLogin = await userPrefs.setUser(data);
+      if (saveLogin) {
+        TextInput.finishAutofillContext();
+        emit(GoToHomeState());
+      } else {
+        emit(DataState(true));
+        emit(AlertState(Failure.proccess(Failure.fromNoInternetConnection())));
+      }
       return;
     });
   }

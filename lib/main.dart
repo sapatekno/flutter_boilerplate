@@ -22,7 +22,7 @@ class MainApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: CubitRouter.getProviders(),
       child: Sizer(builder: (context, orientation, deviceType) {
-        return MaterialAppView();
+        return const MaterialAppView();
       }),
     );
   }

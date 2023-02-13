@@ -1,7 +1,9 @@
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_boilerplate/src/util/string.util.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_local.dart';
+import 'package:surveyami/src/util/string.util.dart';
 
 part 'failure.g.dart';
 
@@ -59,5 +61,11 @@ class Failure extends Equatable {
     }
 
     return result;
+  }
+
+  static String getMessage(BuildContext context, String message) {
+    if (message == 'fromNoInternetConnection') return AppLocalizations.of(context)!.failNoInternet;
+
+    return message;
   }
 }

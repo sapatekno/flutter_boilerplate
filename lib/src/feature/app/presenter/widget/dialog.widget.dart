@@ -9,8 +9,11 @@ showConfirmDialog(
   Function onConfirmClicked,
 ) {
   // set up the buttons
-  Widget cancelButton = ElevatedButton(
-    child: Text(cancelBtnTxt),
+  Widget cancelButton = TextButton(
+    child: Text(
+      cancelBtnTxt,
+      style: const TextStyle(color: Colors.red),
+    ),
     onPressed: () {
       Navigator.of(context).pop(); // dismiss dialog
     },

@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_boilerplate/src/feature/app/presenter/widget/dialog.widget.dart';
-import 'package:flutter_boilerplate/src/router/go.router.dart';
-import 'package:flutter_boilerplate/src/util/string.util.dart';
 import 'package:flutter_gen/gen_l10n/app_local.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sizer/sizer.dart';
+import 'package:surveyami/src/util/string.util.dart';
 
 import '../../../../../config/config.dart';
+import '../../../../../router/go.router.dart';
 import '../../../../../router/sl.router.dart';
 import '../../../../app/data/entity/failure.dart';
+import '../../../../app/presenter/widget/dialog.widget.dart';
+import '../../../../app/presenter/widget/failure.widget.dart';
 import '../../../../app/presenter/widget/loading.widget.dart';
 import '../state/login.state.dart';
 
@@ -33,6 +34,12 @@ class LoginPage extends StatelessWidget {
         builder: (context, state) {
           if (state is LoadState) return const LoadingWidget();
 
+          if (state is FailState) {
+            return FailureWidget(state.failure.message ?? '', () {
+              loginState.getToken();
+            });
+          }
+
           if (state is DataState<bool>) {
             return SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
@@ -40,8 +47,11 @@ class LoginPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 4.h),
+
+                  /// blockDebug(context),
                   blockLogin(context),
-                  blockRegister(context),
+
+                  /// * hide because no register feature # blockRegister(context),
                 ],
               ),
             );
@@ -67,44 +77,56 @@ class LoginPage extends StatelessWidget {
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
-            child: TextFormField(
-              controller: userController,
-              decoration: InputDecoration(
-                prefixIcon: const Icon(Icons.account_circle),
-                labelText: AppLocalizations.of(context)!.username.toTitleCase(),
-              ),
-              validator: FormBuilderValidators.required(),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
-            child: BlocBuilder<LoginState, MainState>(
-              bloc: loginState,
-              buildWhen: (prev, current) => current is PasswordObscureTextState,
-              builder: (context, state) {
-                var data = state is PasswordObscureTextState ? state : PasswordObscureTextState(true);
-                return TextFormField(
-                  controller: passController,
-                  obscureText: data.value,
-                  validator: FormBuilderValidators.required(),
-                  decoration: InputDecoration(
-                    labelText: AppLocalizations.of(context)!.password.toTitleCase(),
-                    prefixIcon: const Icon(Icons.lock),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        // Based on passwordVisible state choose the icon
-                        data.value ? Icons.visibility : Icons.visibility_off,
-                        color: Theme.of(context).primaryColor,
-                      ),
-                      onPressed: () {
-                        loginState.setPasswordObscureTextState(!data.value);
-                      },
+          AutofillGroup(
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
+                  child: TextFormField(
+                    controller: userController,
+                    textInputAction: TextInputAction.next,
+                    autofillHints: const [AutofillHints.username],
+                    keyboardType: TextInputType.name,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.account_circle),
+                      labelText: AppLocalizations.of(context)!.username.toTitleCase(),
                     ),
+                    validator: FormBuilderValidators.required(),
                   ),
-                );
-              },
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
+                  child: BlocBuilder<LoginState, MainState>(
+                    bloc: loginState,
+                    buildWhen: (prev, current) => current is PasswordObscureTextState,
+                    builder: (context, state) {
+                      var data = state is PasswordObscureTextState ? state : PasswordObscureTextState(true);
+                      return TextFormField(
+                        controller: passController,
+                        textInputAction: TextInputAction.next,
+                        autofillHints: const [AutofillHints.password],
+                        keyboardType: TextInputType.text,
+                        obscureText: data.value,
+                        validator: FormBuilderValidators.required(),
+                        decoration: InputDecoration(
+                          labelText: AppLocalizations.of(context)!.password.toTitleCase(),
+                          prefixIcon: const Icon(Icons.lock),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              // Based on passwordVisible state choose the icon
+                              data.value ? Icons.visibility : Icons.visibility_off,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                            onPressed: () {
+                              loginState.setPasswordObscureTextState(!data.value);
+                            },
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
           Padding(
@@ -135,7 +157,7 @@ class LoginPage extends StatelessWidget {
             width: double.infinity,
             child: Text(
               AppLocalizations.of(context)!.createAccount.toTitleCase(),
-              style: Theme.of(context).textTheme.caption,
+              style: Theme.of(context).textTheme.bodySmall,
               textAlign: TextAlign.end,
             ),
           ),
@@ -146,11 +168,9 @@ class LoginPage extends StatelessWidget {
 
   onListener(BuildContext context, MainState state) {
     if (state is AlertState<Failure>) {
-      print(state.data);
       String description = AppLocalizations.of(context)!.noData;
       if (state.data.message != null) {
-        description = state.data.message!;
-        if (state.data.message == 'fromNoInternetConnection') description = AppLocalizations.of(context)!.failNoInternet;
+        description = Failure.getMessage(context, state.data.message!);
       }
       showInfoDialog(
         context,
@@ -161,5 +181,22 @@ class LoginPage extends StatelessWidget {
     }
 
     if (state is GoToHomeState) context.go(pathHome);
+  }
+
+  blockDebug(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        IconButton(
+          onPressed: () {
+            context.push(pathTalker);
+          },
+          icon: Icon(
+            Icons.bug_report,
+            color: Theme.of(context).primaryColor,
+          ),
+        ),
+      ],
+    );
   }
 }
