@@ -1,32 +1,38 @@
 import 'package:alice/alice.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_local.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:form_builder_validators/localization/l10n.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-import '../../presenter/home/view/home.view.dart';
-import '../sl.app.dart';
-import '../state.app.dart';
-import 'cubit/material.app.cubit.dart';
+import '../../feature/auth/auth.login/presenter/page/login.page.dart';
+import '../../router/sl.router.dart';
 
 class MaterialAppView extends StatelessWidget {
   MaterialAppView({Key? key}) : super(key: key);
 
-  final MaterialAppCubit materialAppCubit = sl.get<MaterialAppCubit>();
   final Alice alice = sl.get<Alice>();
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MaterialAppCubit, StateApp>(
-      builder: (context, state) {
-        return MaterialApp(
-          navigatorKey: alice.getNavigatorKey(),
-          title: 'Flutter Boilerplate',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-            textTheme: materialAppCubit.textTheme,
-          ),
-          home: HomeView(),
-        );
-      },
+    return MaterialApp(
+      navigatorKey: alice.getNavigatorKey(),
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        FormBuilderLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: AppLocalizations.supportedLocales,
+      locale: const Locale('id'),
+      title: 'Flutter Boilerplate',
+      theme: ThemeData(
+        textTheme: GoogleFonts.ubuntuTextTheme(),
+        primarySwatch: Colors.indigo,
+        inputDecorationTheme: const InputDecorationTheme(border: OutlineInputBorder()),
+      ),
+      home: LoginPage(),
     );
   }
 }

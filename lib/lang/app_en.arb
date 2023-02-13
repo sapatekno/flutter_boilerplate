@@ -1,0 +1,10 @@
+{
+  "login": "login",
+  "username": "username",
+  "password": "password",
+  "createAccount": "create an account",
+  "information": "information",
+  "failNoInternet": "unable to connect to the internet, check your network connection",
+  "ok": "ok",
+  "noData": "no data"
+}

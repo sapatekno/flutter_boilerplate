@@ -1,31 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_boilerplate/src/app/material.app/cubit/material.app.cubit.dart';
-import 'package:flutter_boilerplate/src/app/material.app/material.app.view.dart';
-import 'package:flutter_boilerplate/src/app/sl.app.dart' as sl;
+import 'package:sizer/sizer.dart';
 
-import 'src/presenter/user/cubit/home.cubit.dart';
+import 'src/app/material.app/material.app.view.dart';
+import 'src/config/config.dart';
+import 'src/router/cubit.router.dart';
+import 'src/router/sl.router.dart' as sl;
 
-Future<void> main() async {
-  /// * Make sure all flutter libraries ready for another third party library.
-  WidgetsFlutterBinding.ensureInitialized();
-
-  await sl.init();
-
-  runApp(const MyApp());
+/// * This is poin when you want init third parties libraries (e.g. Firebase).
+Future<void> init(Config config) async {
+  await sl.init(config);
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MainApp extends StatelessWidget {
+  final Config config;
+
+  const MainApp(this.config, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider<MaterialAppCubit>(create: (_) => sl.sl.get<MaterialAppCubit>(), lazy: false),
-        BlocProvider<HomeCubit>(create: (_) => sl.sl.get<HomeCubit>(), lazy: true),
-      ],
-      child: MaterialAppView(),
+      providers: CubitRouter.getProviders(),
+      child: Sizer(builder: (context, orientation, deviceType) {
+        return MaterialAppView();
+      }),
     );
   }
 }

@@ -1,0 +1,10 @@
+{
+  "login": "masuk",
+  "username": "nama pengguna",
+  "password": "kata sandi",
+  "createAccount": "buat akun",
+  "information": "informasi",
+  "failNoInternet": "tidak dapat terhubung ke internet, periksa koneksi jaringan anda",
+  "ok": "oke",
+  "noData": "tidak ada data"
+}
