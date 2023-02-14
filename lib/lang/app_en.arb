@@ -35,5 +35,7 @@
   "openLocationSettings": "open location settings",
   "failLocationpermissionDeniedForever": "location access permission is denied forever, please change access in app settings",
   "failLocationpermissionDenied": "location access permission denied, app needs location access to continue the process",
-  "loading": "loading..."
+  "loading": "loading...",
+  "substationType": "substation type",
+  "description": "description"
 }

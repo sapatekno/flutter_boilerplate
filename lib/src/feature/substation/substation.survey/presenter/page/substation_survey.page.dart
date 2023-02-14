@@ -31,65 +31,7 @@ class SubStationSurveyPage extends StatelessWidget {
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
-          child: Card(
-            clipBehavior: Clip.antiAlias,
-            child: Column(
-              children: [
-                ListTile(
-                  leading: Icon(Icons.cloud, color: Theme.of(context).primaryColor),
-                  title: Text(
-                    AppLocalizations.of(context)!.dataServer.toTitleCase(),
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(3.w),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            AppLocalizations.of(context)!.substationNumber.toTitleCase(),
-                            style: const TextStyle(
-                              height: 2,
-                            ),
-                          ),
-                          const Text(': ', style: TextStyle(height: 2)),
-                          const Text('-', style: TextStyle(height: 2)),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            AppLocalizations.of(context)!.latitude.toTitleCase(),
-                            style: const TextStyle(
-                              height: 2,
-                            ),
-                          ),
-                          const Text(': ', style: TextStyle(height: 2)),
-                          const Text('-', style: TextStyle(height: 2)),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            AppLocalizations.of(context)!.longitude.toTitleCase(),
-                            style: const TextStyle(
-                              height: 2,
-                            ),
-                          ),
-                          const Text(': ', style: TextStyle(height: 2)),
-                          const Text('-', style: TextStyle(height: 2)),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+          child: blockDataServer(context),
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
@@ -106,6 +48,108 @@ class SubStationSurveyPage extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  blockDataServer(BuildContext context) {
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ListTile(
+            leading: Icon(Icons.cloud, color: Theme.of(context).primaryColor),
+            title: Text(
+              AppLocalizations.of(context)!.dataServer.toTitleCase(),
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(3.w),
+            child: Table(
+              defaultColumnWidth: const IntrinsicColumnWidth(),
+              children: [
+                TableRow(
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)!.substationNumber.toTitleCase(),
+                      style: const TextStyle(
+                        height: 2,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 4.w),
+                      child: const Text(" :", style: TextStyle(height: 2)),
+                    ),
+                    const Text('-', style: TextStyle(height: 2)),
+                  ],
+                ),
+                TableRow(
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)!.latitude.toTitleCase(),
+                      style: const TextStyle(
+                        height: 2,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 4.w),
+                      child: const Text(" :", style: TextStyle(height: 2)),
+                    ),
+                    const Text('-', style: TextStyle(height: 2)),
+                  ],
+                ),
+                TableRow(
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)!.longitude.toTitleCase(),
+                      style: const TextStyle(
+                        height: 2,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 4.w),
+                      child: const Text(" :", style: TextStyle(height: 2)),
+                    ),
+                    const Text('-', style: TextStyle(height: 2)),
+                  ],
+                ),
+                TableRow(
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)!.substationType.toTitleCase(),
+                      style: const TextStyle(
+                        height: 2,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 4.w),
+                      child: const Text(" :", style: TextStyle(height: 2)),
+                    ),
+                    const Text('-', style: TextStyle(height: 2)),
+                  ],
+                ),
+                TableRow(
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)!.description.toTitleCase(),
+                      style: const TextStyle(
+                        height: 2,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 4.w),
+                      child: const Text(" :", style: TextStyle(height: 2)),
+                    ),
+                    const Text('-', style: TextStyle(height: 2)),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

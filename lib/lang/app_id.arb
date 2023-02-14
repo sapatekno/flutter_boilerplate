@@ -35,5 +35,7 @@
   "openLocationSettings": "buka pengaturan lokasi",
   "failLocationpermissionDeniedForever": "izin akses lokasi ditolak selamanya, harap ubah akses di pengaturan aplikasi",
   "failLocationpermissionDenied": "izin akses lokasi ditolak, aplikasi memerlukan akses lokasi untuk melanjutkan proses",
-  "loading": "memuat..."
+  "loading": "memuat...",
+  "substationType": "tipe gardu",
+  "description": "deskripsi"
 }
