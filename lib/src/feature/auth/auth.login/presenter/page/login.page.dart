@@ -133,8 +133,9 @@ class LoginPage extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
             child: SizedBox(
               width: double.infinity,
-              child: ElevatedButton(
-                child: Text(AppLocalizations.of(context)!.login.toTitleCase()),
+              child: ElevatedButton.icon(
+                icon: const Icon(Icons.login),
+                label: Text(AppLocalizations.of(context)!.login.toTitleCase()),
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
                     loginState.doLogin(userController.text, passController.text);
@@ -175,12 +176,14 @@ class LoginPage extends StatelessWidget {
       showInfoDialog(
         context,
         null,
-        description.toCapitalize(),
-        AppLocalizations.of(context)!.ok.toTitleCase(),
+        description,
+        AppLocalizations.of(context)!.ok,
       );
     }
 
-    if (state is GoToHomeState) context.go(pathHome);
+    if (state is GoToHomeState) {
+      context.go(pathHome);
+    }
   }
 
   blockDebug(BuildContext context) {

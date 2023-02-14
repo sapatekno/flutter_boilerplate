@@ -25,7 +25,7 @@ class MaterialAppView extends StatelessWidget {
       title: 'Survei AMI',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        textTheme: GoogleFonts.ubuntuTextTheme(),
+        textTheme: GoogleFonts.latoTextTheme(),
         primarySwatch: Colors.indigo,
         inputDecorationTheme: const InputDecorationTheme(border: OutlineInputBorder()),
       ),

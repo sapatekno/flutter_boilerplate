@@ -37,4 +37,4 @@ class AlertState<T> extends MainState {
 
 enum ListState<T> { init, initDone, initFail, load, loadDone, loadFail, refresh, refreshDone, refreshFail }
 
-enum MiniState<T> { init, done, fail }
+enum MiniState<T> { init, load, done, fail }

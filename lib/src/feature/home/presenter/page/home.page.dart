@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_local.dart';
 import 'package:go_router/go_router.dart';
 import 'package:surveyami/src/feature/app/presenter/widget/dialog.widget.dart';
+import 'package:surveyami/src/feature/customer/customer.survey/presenter/page/customer_survey.page.dart';
+import 'package:surveyami/src/feature/substation/substation.survey/presenter/page/substation_survey.page.dart';
 import 'package:surveyami/src/util/string.util.dart';
 
 import '../../../../router/go.router.dart';
@@ -25,9 +27,11 @@ class _HomePageState extends State<HomePage> {
     listHomeData = [
       HomeData(
         title: AppLocalizations.of(context)!.substationSurvey,
+        page: const SubStationSurveyPage(),
       ),
       HomeData(
         title: AppLocalizations.of(context)!.customerSurvey,
+        page: const CustomerSurveyPage(),
       ),
     ];
 
@@ -40,10 +44,10 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {
               showConfirmDialog(
                 context,
-                AppLocalizations.of(context)!.logout.toTitleCase(),
-                AppLocalizations.of(context)!.logoutConfirmation.toCapitalize(),
-                AppLocalizations.of(context)!.yes.toTitleCase(),
-                AppLocalizations.of(context)!.no.toTitleCase(),
+                AppLocalizations.of(context)!.logout,
+                AppLocalizations.of(context)!.logoutConfirmation,
+                AppLocalizations.of(context)!.yes,
+                AppLocalizations.of(context)!.no,
                 () async {
                   var userPref = sl.get<UserPrefs>();
                   await userPref.removeUser();
@@ -54,7 +58,7 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: const Center(),
+      body: listHomeData[currentIndex].page,
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -79,6 +83,7 @@ class _HomePageState extends State<HomePage> {
 
 class HomeData {
   final String title;
+  final Widget page;
 
-  HomeData({required this.title});
+  HomeData({required this.title, required this.page});
 }

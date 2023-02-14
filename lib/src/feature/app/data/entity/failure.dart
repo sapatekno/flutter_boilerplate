@@ -36,8 +36,41 @@ class Failure extends Equatable {
     );
   }
 
-  static Failure fromNoInternetConnection() {
-    String message = 'fromNoInternetConnection';
+  static Failure failNoInternet() {
+    String message = 'failNoInternet';
+    String detail = '';
+
+    return Failure(
+      isProcessed: true,
+      message: message,
+      detail: detail,
+    );
+  }
+
+  static Failure failNoLocationService() {
+    String message = 'failNoLocationService';
+    String detail = '';
+
+    return Failure(
+      isProcessed: true,
+      message: message,
+      detail: detail,
+    );
+  }
+
+  static Failure failLocationpermissionDenied() {
+    String message = 'failLocationpermissionDenied';
+    String detail = '';
+
+    return Failure(
+      isProcessed: true,
+      message: message,
+      detail: detail,
+    );
+  }
+
+  static Failure failLocationpermissionDeniedForever() {
+    String message = 'failLocationpermissionDeniedForever';
     String detail = '';
 
     return Failure(
@@ -64,7 +97,10 @@ class Failure extends Equatable {
   }
 
   static String getMessage(BuildContext context, String message) {
-    if (message == 'fromNoInternetConnection') return AppLocalizations.of(context)!.failNoInternet;
+    if (message == 'failNoInternet') return AppLocalizations.of(context)!.failNoInternet;
+    if (message == 'failNoLocationService') return AppLocalizations.of(context)!.failNoLocationService;
+    if (message == 'failLocationpermissionDenied') return AppLocalizations.of(context)!.failLocationpermissionDenied;
+    if (message == 'failLocationpermissionDeniedForever') return AppLocalizations.of(context)!.failLocationpermissionDeniedForever;
 
     return message;
   }

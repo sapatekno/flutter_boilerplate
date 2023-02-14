@@ -28,5 +28,12 @@
   "logout": "logout",
   "logoutConfirmation": "are you sure want to logout?",
   "yes": "yes",
-  "no": "no"
+  "no": "no",
+  "failNoLocationService": "location service on this device is not active, please enable it first",
+  "cancel": "cancel",
+  "openApplicationSettings": "open aplication settings",
+  "openLocationSettings": "open location settings",
+  "failLocationpermissionDeniedForever": "location access permission is denied forever, please change access in app settings",
+  "failLocationpermissionDenied": "location access permission denied, app needs location access to continue the process",
+  "loading": "loading..."
 }

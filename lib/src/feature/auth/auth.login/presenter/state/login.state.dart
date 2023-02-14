@@ -24,7 +24,7 @@ class LoginState extends Cubit<MainState> {
     if (!await internet.hasConnection()) {
       await Future.delayed(const Duration(seconds: 1));
       emit(DataState(true));
-      emit(FailState(Failure.fromNoInternetConnection()));
+      emit(FailState(Failure.failNoInternet()));
       return;
     }
 
@@ -43,7 +43,7 @@ class LoginState extends Cubit<MainState> {
     if (!await internet.hasConnection()) {
       await Future.delayed(const Duration(seconds: 1));
       emit(DataState(true));
-      emit(AlertState(Failure.fromNoInternetConnection()));
+      emit(AlertState(Failure.failNoInternet()));
       return;
     }
 
@@ -57,11 +57,11 @@ class LoginState extends Cubit<MainState> {
     }, (data) async {
       bool saveLogin = await userPrefs.setUser(data);
       if (saveLogin) {
-        TextInput.finishAutofillContext();
+        TextInput.finishAutofillContext(shouldSave: true);
         emit(GoToHomeState());
       } else {
         emit(DataState(true));
-        emit(AlertState(Failure.proccess(Failure.fromNoInternetConnection())));
+        emit(AlertState(Failure.proccess(Failure.failNoInternet())));
       }
       return;
     });

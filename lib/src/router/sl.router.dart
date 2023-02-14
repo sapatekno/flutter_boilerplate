@@ -12,6 +12,7 @@ import '../feature/app/data/source/network/client/http.client.dart';
 import '../feature/auth/auth.login/presenter/state/login.state.dart';
 import '../feature/auth/data/repository/auth.repo.dart';
 import '../feature/auth/data/repository/impl/auth.repo.impl.dart';
+import '../feature/location/presenter/state/location.state.dart';
 import '../util/crypto.util.dart';
 import '../util/internet.util.dart';
 import '../util/logger.util.dart';
@@ -43,6 +44,6 @@ Future<void> init(Config config) async {
   sl.registerLazySingleton<AuthRepo>(() => AuthRepoImpl(sl()));
 
   /// * Cubit (State)
-  /// sl.registerSingleton<MaterialAppCubit>(MaterialAppCubit());
   sl.registerFactory<LoginState>(() => LoginState(sl(), sl(), sl()));
+  sl.registerLazySingleton<LocationState>(() => LocationState());
 }

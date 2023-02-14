@@ -28,5 +28,12 @@
   "logout": "logout",
   "logoutConfirmation": "apakah anda yakin ingin logout?",
   "yes": "ya",
-  "no": "tidak"
+  "no": "tidak",
+  "failNoLocationService": "lokasi layanan di perangkat ini tidak aktif, harap aktifkan terlebih dahulu",
+  "cancel": "cancel",
+  "openApplicationSettings": "buka pengaturan aplikasi",
+  "openLocationSettings": "buka pengaturan lokasi",
+  "failLocationpermissionDeniedForever": "izin akses lokasi ditolak selamanya, harap ubah akses di pengaturan aplikasi",
+  "failLocationpermissionDenied": "izin akses lokasi ditolak, aplikasi memerlukan akses lokasi untuk melanjutkan proses",
+  "loading": "memuat..."
 }
