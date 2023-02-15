@@ -34,6 +34,7 @@ class CustomerSurveyPage extends StatelessWidget {
           child: Card(
             clipBehavior: Clip.antiAlias,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ListTile(
                   leading: Icon(Icons.cloud, color: Theme.of(context).primaryColor),
@@ -44,10 +45,10 @@ class CustomerSurveyPage extends StatelessWidget {
                 ),
                 Padding(
                   padding: EdgeInsets.all(3.w),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
+                  child: Table(
+                    defaultColumnWidth: const IntrinsicColumnWidth(),
                     children: [
-                      Row(
+                      TableRow(
                         children: [
                           Text(
                             AppLocalizations.of(context)!.customerId.toTitleCase(),
@@ -55,11 +56,14 @@ class CustomerSurveyPage extends StatelessWidget {
                               height: 2,
                             ),
                           ),
-                          const Text(': ', style: TextStyle(height: 2)),
+                          Padding(
+                            padding: EdgeInsets.only(right: 4.w),
+                            child: const Text(" :", style: TextStyle(height: 2)),
+                          ),
                           const Text('-', style: TextStyle(height: 2)),
                         ],
                       ),
-                      Row(
+                      TableRow(
                         children: [
                           Text(
                             AppLocalizations.of(context)!.name.toTitleCase(),
@@ -67,11 +71,14 @@ class CustomerSurveyPage extends StatelessWidget {
                               height: 2,
                             ),
                           ),
-                          const Text(': ', style: TextStyle(height: 2)),
+                          Padding(
+                            padding: EdgeInsets.only(right: 4.w),
+                            child: const Text(" :", style: TextStyle(height: 2)),
+                          ),
                           const Text('-', style: TextStyle(height: 2)),
                         ],
                       ),
-                      Row(
+                      TableRow(
                         children: [
                           Text(
                             AppLocalizations.of(context)!.rates.toTitleCase(),
@@ -79,11 +86,14 @@ class CustomerSurveyPage extends StatelessWidget {
                               height: 2,
                             ),
                           ),
-                          const Text(': ', style: TextStyle(height: 2)),
+                          Padding(
+                            padding: EdgeInsets.only(right: 4.w),
+                            child: const Text(" :", style: TextStyle(height: 2)),
+                          ),
                           const Text('-', style: TextStyle(height: 2)),
                         ],
                       ),
-                      Row(
+                      TableRow(
                         children: [
                           Text(
                             AppLocalizations.of(context)!.power.toTitleCase(),
@@ -91,11 +101,14 @@ class CustomerSurveyPage extends StatelessWidget {
                               height: 2,
                             ),
                           ),
-                          const Text(': ', style: TextStyle(height: 2)),
+                          Padding(
+                            padding: EdgeInsets.only(right: 4.w),
+                            child: const Text(" :", style: TextStyle(height: 2)),
+                          ),
                           const Text('-', style: TextStyle(height: 2)),
                         ],
                       ),
-                      Row(
+                      TableRow(
                         children: [
                           Text(
                             AppLocalizations.of(context)!.address.toTitleCase(),
@@ -103,11 +116,14 @@ class CustomerSurveyPage extends StatelessWidget {
                               height: 2,
                             ),
                           ),
-                          const Text(': ', style: TextStyle(height: 2)),
+                          Padding(
+                            padding: EdgeInsets.only(right: 4.w),
+                            child: const Text(" :", style: TextStyle(height: 2)),
+                          ),
                           const Text('-', style: TextStyle(height: 2)),
                         ],
                       ),
-                      Row(
+                      TableRow(
                         children: [
                           Text(
                             AppLocalizations.of(context)!.substationNumber.toTitleCase(),
@@ -115,12 +131,14 @@ class CustomerSurveyPage extends StatelessWidget {
                               height: 2,
                             ),
                           ),
-                          const Text(': ', style: TextStyle(height: 2)),
+                          Padding(
+                            padding: EdgeInsets.only(right: 4.w),
+                            child: const Text(" :", style: TextStyle(height: 2)),
+                          ),
                           const Text('-', style: TextStyle(height: 2)),
                         ],
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                      TableRow(
                         children: [
                           Text(
                             AppLocalizations.of(context)!.latitude.toTitleCase(),
@@ -128,11 +146,14 @@ class CustomerSurveyPage extends StatelessWidget {
                               height: 2,
                             ),
                           ),
-                          const Text(': ', style: TextStyle(height: 2)),
+                          Padding(
+                            padding: EdgeInsets.only(right: 4.w),
+                            child: const Text(" :", style: TextStyle(height: 2)),
+                          ),
                           const Text('-', style: TextStyle(height: 2)),
                         ],
                       ),
-                      Row(
+                      TableRow(
                         children: [
                           Text(
                             AppLocalizations.of(context)!.longitude.toTitleCase(),
@@ -140,7 +161,10 @@ class CustomerSurveyPage extends StatelessWidget {
                               height: 2,
                             ),
                           ),
-                          const Text(': ', style: TextStyle(height: 2)),
+                          Padding(
+                            padding: EdgeInsets.only(right: 4.w),
+                            child: const Text(" :", style: TextStyle(height: 2)),
+                          ),
                           const Text('-', style: TextStyle(height: 2)),
                         ],
                       ),
