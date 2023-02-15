@@ -178,6 +178,7 @@ class LoginPage extends StatelessWidget {
         null,
         description,
         AppLocalizations.of(context)!.ok,
+        null,
       );
     }
 

@@ -17,6 +17,8 @@ class InitState extends MainState {}
 
 class LoadState extends MainState {}
 
+class UnauthorizedState extends MainState {}
+
 class DataState<T> extends MainState {
   final T data;
 

@@ -1,5 +1,5 @@
 {
-  "login": "masuk",
+  "login": "login",
   "username": "nama pengguna",
   "password": "kata sandi",
   "createAccount": "buat akun",
@@ -47,5 +47,9 @@
   "numberOfChannels": "jumlah saluran",
   "deleteConfirmation": "anda yakin ingin menghapus data?",
   "saveConfirmation": "anda yakin ingin menyimpan data?",
-  "dataEmptyMessage": "data masih kosong"
+  "dataEmptyMessage": "data masih kosong",
+  "dataCannotEmptyMessage": "data tidak boleh kosong",
+  "unknownError": "terjadi kesalahan yang tidak diketahui",
+  "unauthorizedMessage": "maaf sesi anda telah berakhir, silahkan login kembali",
+  "resetConfirmationMessage": "semua perubahan data tidak akan disimpan, apakah Anda yakin?"
 }

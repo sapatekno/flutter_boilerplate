@@ -44,12 +44,19 @@ showConfirmDialog(
   );
 }
 
-showInfoDialog(BuildContext context, String? title, String description, String confirmBtnTxt) {
+showInfoDialog(
+  BuildContext context,
+  String? title,
+  String description,
+  String confirmBtnTxt,
+  Function? onConfirmClicked,
+) {
   // set up the buttons
 
   Widget confirmButton = ElevatedButton(
     child: Text(confirmBtnTxt.toTitleCase()),
     onPressed: () {
+      if (onConfirmClicked != null) onConfirmClicked.call();
       Navigator.of(context).pop(); // dismiss dialog
     },
   );

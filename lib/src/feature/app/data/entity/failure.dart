@@ -23,17 +23,36 @@ class Failure extends Equatable {
     this.stackTrace,
   });
 
-  static Failure fromNoResponseFromApi(Response response) {
-    String message = 'noresponsefromapi';
-    String detail = '';
-    detail += 'url : ${response.requestOptions.baseUrl}${response.requestOptions.path}\n';
-    detail += 'status : ${response.statusCode}\n';
+  static bool isUnauthorized(dynamic error) {
+    if (error is DioError) {
+      DioError dioError = error;
+      int statusCode = (dioError.response?.statusCode ?? 0);
+      if (statusCode > 400 && statusCode < 499) return true;
+    }
+    return false;
+  }
 
-    return Failure(
-      isProcessed: true,
-      message: message,
-      detail: detail,
-    );
+  static Failure doProccess(Failure data) {
+    if (data.isProcessed == true) return data;
+    var result = data.copyWith(isProcessed: true);
+
+    if (result.error is DioError) {
+      var dioError = result.error as DioError;
+      String message = dioError.response?.data['message'] ?? dioError.message;
+      result = result.copyWith(message: message.toCapitalize());
+    }
+
+    return result;
+  }
+
+  static String getMessage(BuildContext context, String message) {
+    if (message == 'failNoInternet') return AppLocalizations.of(context)!.failNoInternet;
+    if (message == 'failNoLocationService') return AppLocalizations.of(context)!.failNoLocationService;
+    if (message == 'failLocationpermissionDenied') return AppLocalizations.of(context)!.failLocationpermissionDenied;
+    if (message == 'failLocationpermissionDeniedForever') return AppLocalizations.of(context)!.failLocationpermissionDeniedForever;
+    if (message == 'unknownError') return AppLocalizations.of(context)!.unknownError;
+
+    return message;
   }
 
   static Failure failNoInternet() {
@@ -80,28 +99,17 @@ class Failure extends Equatable {
     );
   }
 
+  static Failure failSuccessIsFalse(String? data) {
+    String message = data ?? 'unknownError';
+    String detail = '';
+
+    return Failure(
+      isProcessed: true,
+      message: message,
+      detail: detail,
+    );
+  }
+
   @override
   List<Object?> get props => [isProcessed, message, error, stackTrace];
-
-  static Failure proccess(Failure data) {
-    if (data.isProcessed == true) return data;
-    var result = data.copyWith(isProcessed: true);
-
-    if (result.error is DioError) {
-      var dioError = result.error as DioError;
-      String message = dioError.response?.data['message'] ?? dioError.message;
-      result = result.copyWith(message: message.toCapitalize());
-    }
-
-    return result;
-  }
-
-  static String getMessage(BuildContext context, String message) {
-    if (message == 'failNoInternet') return AppLocalizations.of(context)!.failNoInternet;
-    if (message == 'failNoLocationService') return AppLocalizations.of(context)!.failNoLocationService;
-    if (message == 'failLocationpermissionDenied') return AppLocalizations.of(context)!.failLocationpermissionDenied;
-    if (message == 'failLocationpermissionDeniedForever') return AppLocalizations.of(context)!.failLocationpermissionDeniedForever;
-
-    return message;
-  }
 }

@@ -20,9 +20,7 @@ class AuthRepoImpl implements AuthRepo {
       (failure) => left(failure),
       (source) {
         try {
-          if (source.data == null) return Left(Failure.fromNoResponseFromApi(source));
           var response = BaseRes<LoginRes>.fromJson(source.data, (json) => LoginRes.fromJson(json as dynamic));
-          if (response.data == null) return Left(Failure.fromNoResponseFromApi(source));
           var result = LoginResE.fromLoginRes(response.data!);
           return Right(result);
         } catch (error, stackTrace) {

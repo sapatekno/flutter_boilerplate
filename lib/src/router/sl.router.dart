@@ -1,9 +1,12 @@
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:surveyami/src/feature/substation/data/repository/impl/subsatation.repo.impl.dart';
+import 'package:surveyami/src/feature/substation/data/repository/substation.repo.dart';
 import 'package:surveyami/src/feature/substation/substation.survey/presenter/state/substation_survey.state.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
 import '../config/config.dart';
+import '../feature/app/data/session/session.dart';
 import '../feature/app/data/source/local/client/local.client.dart';
 import '../feature/app/data/source/local/prefs/impl/user.prefs.impl.dart';
 import '../feature/app/data/source/local/prefs/user.prefs.dart';
@@ -40,14 +43,18 @@ Future<void> init(Config config) async {
   sl.registerLazySingleton<UserPrefs>(() => UserPrefsImpl(sl()));
 
   /// * API
-  sl.registerLazySingleton<SurveyAmiApi>(() => SurveyAmiApiImpl(sl(), sl()));
+  sl.registerLazySingleton<SurveyAmiApi>(() => SurveyAmiApiImpl(sl(), sl(), sl()));
+
+  /// * Session (Global Data)
+  sl.registerSingleton<Session>(Session(sl()));
 
   /// * Repositories
   sl.registerLazySingleton<AuthRepo>(() => AuthRepoImpl(sl()));
+  sl.registerLazySingleton<SubStationRepo>(() => SubStationRepoImpl(sl()));
 
   /// * Cubit (State)
-  sl.registerFactory<LoginState>(() => LoginState(sl(), sl(), sl()));
+  sl.registerFactory<LoginState>(() => LoginState(sl(), sl(), sl(), sl()));
   sl.registerLazySingleton<LocationState>(() => LocationState());
   sl.registerFactory<TrafoState>(() => TrafoState());
-  sl.registerFactory<SubStationSurveyState>(() => SubStationSurveyState());
+  sl.registerFactory<SubStationSurveyState>(() => SubStationSurveyState(sl()));
 }

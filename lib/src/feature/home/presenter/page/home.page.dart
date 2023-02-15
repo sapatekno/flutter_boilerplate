@@ -8,7 +8,7 @@ import 'package:surveyami/src/util/string.util.dart';
 
 import '../../../../router/go.router.dart';
 import '../../../../router/sl.router.dart';
-import '../../../app/data/source/local/prefs/user.prefs.dart';
+import '../../../app/data/session/session.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -49,8 +49,8 @@ class _HomePageState extends State<HomePage> {
                 AppLocalizations.of(context)!.yes,
                 AppLocalizations.of(context)!.no,
                 () async {
-                  var userPref = sl.get<UserPrefs>();
-                  await userPref.removeUser();
+                  var session = sl.get<Session>();
+                  await session.remove();
                   context.go(pathInitial);
                 },
               );

@@ -47,5 +47,9 @@
   "numberOfChannels": "number of channels",
   "deleteConfirmation": "are you sure you want to delete data?",
   "saveConfirmation": "are you sure you want to save data?",
-  "dataEmptyMessage": "data is still empty"
+  "dataEmptyMessage": "data is still empty",
+  "dataCannotEmptyMessage": "data cannot be empty",
+  "unknownError": "an unknown error occurred",
+  "unauthorizedMessage": "sorry your session has ended, please login again",
+  "resetConfirmationMessage": "all data changes will not be saved, are you sure?"
 }

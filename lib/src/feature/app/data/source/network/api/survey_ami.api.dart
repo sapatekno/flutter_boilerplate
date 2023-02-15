@@ -8,7 +8,7 @@ import 'api.dart';
 abstract class SurveyAmiApi extends Api {
   Future<Either<Failure, Response>> postAuthLogin(LoginReq data);
 
-  Future<Either<Failure, Response>> getGarduById();
+  Future<Either<Failure, Response>> getGarduById(String id);
 
   Future<Either<Failure, Response>> postGarduTagging();
 

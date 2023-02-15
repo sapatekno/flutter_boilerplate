@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../config/config.dart';
 import '../../../../../util/internet.util.dart';
 import '../../../../app/data/entity/failure.dart';
+import '../../../../app/data/session/session.dart';
 import '../../../../app/data/source/local/prefs/user.prefs.dart';
 import '../../../data/repository/auth.repo.dart';
 import '../../data/entity/request/login.req.e.dart';
@@ -12,8 +13,9 @@ class LoginState extends Cubit<MainState> {
   final AuthRepo authRepo;
   final UserPrefs userPrefs;
   final InternetUtil internet;
+  final Session session;
 
-  LoginState(this.authRepo, this.userPrefs, this.internet) : super(InitState());
+  LoginState(this.authRepo, this.userPrefs, this.internet, this.session) : super(InitState());
 
   void setPasswordObscureTextState(bool value) => emit(PasswordObscureTextState(value));
 
@@ -29,12 +31,12 @@ class LoginState extends Cubit<MainState> {
     }
 
     /// * Cek jika user sudah login (ada data, termasuk token) pindah ke halaman utama
-    var user = userPrefs.getUser();
-    user.fold((nodata) {
+    var user = session.user;
+    if (session.user == null) {
       emit(DataState(true));
-    }, (data) {
+    } else {
       emit(GoToHomeState());
-    });
+    }
   }
 
   void doLogin(String user, String pass) async {
@@ -52,16 +54,16 @@ class LoginState extends Cubit<MainState> {
 
     source.fold((failure) {
       emit(DataState(true));
-      emit(AlertState(Failure.proccess(failure)));
+      emit(AlertState(Failure.doProccess(failure)));
       return;
     }, (data) async {
-      bool saveLogin = await userPrefs.setUser(data);
+      bool saveLogin = await session.update(data);
       if (saveLogin) {
         TextInput.finishAutofillContext(shouldSave: true);
         emit(GoToHomeState());
       } else {
         emit(DataState(true));
-        emit(AlertState(Failure.proccess(Failure.failNoInternet())));
+        emit(AlertState(Failure.doProccess(Failure.failNoInternet())));
       }
       return;
     });
