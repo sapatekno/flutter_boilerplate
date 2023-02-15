@@ -1,42 +1,50 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator_platform_interface/src/models/position.dart';
 import 'package:surveyami/src/feature/substation/substation.survey/data/entity/request/substation.req.e.dart';
+import 'package:surveyami/src/util/time.util.dart';
 
 import '../../../../../config/config.dart';
 import '../../../../app/data/entity/failure.dart';
+import '../../../../app/data/session/session.dart';
+import '../../../../file/data/repository/file.repo.dart';
 import '../../../data/repository/substation.repo.dart';
 import '../../data/entity/request/substation_detail.req.e.dart';
 import '../../data/entity/response/substation.res.e.dart';
 
 class SubStationSurveyState extends Cubit<MainState> {
   final SubStationRepo subStationRepo;
+  final Session session;
+  final FileRepo fileRepo;
 
-  SubStationSurveyState(this.subStationRepo) : super(InitState());
+  SubStationSurveyState(this.subStationRepo, this.session, this.fileRepo) : super(InitState());
 
   SubstationReqE? dataReq;
   SubStationResE? dataRes;
+  String? localPhotoPath;
 
   void initState() {
     emit(LoadState());
 
-    dataReq = const SubstationReqE(
-      akurasi: 0,
-      detailGardu: [],
-      jumlahTrafo: 0,
-      latitude: 0,
-      longitude: 0,
-      nomorGardu: '',
-      petugas: '',
-      surveyZoneTime: '',
-      tanggalSurvey: '',
+    dataReq = SubstationReqE.initial();
+    dataRes = null;
+    localPhotoPath = null;
+
+    dataReq = dataReq?.copyWith(
+      petugas: session.user?.userapp,
+      surveyZoneTime: TimeUtil.timeZoneOffsetServerFormat(DateTime.now()),
+      tanggalSurvey: TimeUtil.dateServerFormat(DateTime.now()),
     );
 
-    emit(DataState(dataReq));
+    emit(DataState(true));
   }
 
   void updateDetailGardu(List<SubStationDetailReqE> listData) {
     emit(LoadState());
-    dataReq = dataReq?.copyWith(detailGardu: listData);
-    emit(DataState(TrafoControllerState()));
+    dataReq = dataReq?.copyWith(
+      detailGardu: listData,
+      jumlahTrafo: listData.length,
+    );
+    emit(DataState(true));
   }
 
   void getGarduById(String id) async {
@@ -45,19 +53,55 @@ class SubStationSurveyState extends Cubit<MainState> {
     var source = await subStationRepo.getGarduById(id);
     source.fold(
       (failure) {
+        initState();
         if (Failure.isUnauthorized(failure.error)) {
           emit(UnauthorizedState());
+          emit(DataState(true));
           return;
         }
-        dataRes = null;
         emit(AlertState(failure));
+        emit(DataState(true));
       },
       (data) {
         dataRes = data;
-        emit(DataState(data));
+        dataReq = dataReq?.copyWith(nomorGardu: data.nomorGardu);
+        emit(DataState(true));
       },
     );
   }
-}
 
-class TrafoControllerState {}
+  void updatePhoto(String path) {
+    emit(LoadState());
+    localPhotoPath = path;
+    emit(DataState(true));
+  }
+
+  void saveSurvey(Position currentPosition) async {
+    emit(LoadState());
+
+    var uploadPhoto = await fileRepo.postMinioUpload(dataReq!.nomorGardu!, localPhotoPath!);
+    uploadPhoto.fold(
+      (failure) {
+        if (Failure.isUnauthorized(failure.error)) {
+          emit(UnauthorizedState());
+          emit(DataState(true));
+          return;
+        }
+        emit(AlertState(failure));
+        emit(DataState(true));
+      },
+      (uploadPath) async {
+        dataReq = dataReq?.copyWith(
+          akurasi: currentPosition.accuracy,
+          latitude: currentPosition.latitude,
+          longitude: currentPosition.longitude,
+          photo: uploadPath,
+        );
+
+        await subStationRepo.postGarduTagging(dataReq!.toSubstationReq());
+      },
+    );
+
+    initState();
+  }
+}

@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:path/path.dart';
+import 'package:surveyami/src/feature/substation/substation.survey/data/model/request/substation.req.dart';
 
 import '../../../../../../../config/config.dart';
 import '../../../../../../auth/auth.login/data/model/request/login.req.dart';
@@ -22,6 +24,8 @@ class SurveyAmiApiImpl implements SurveyAmiApi {
 
   String pathGetPelangganById = 'secure/pelanggan/find-by-id';
   String pathPostPelangganTagging = 'secure/pelanggan/tagging';
+
+  String pathPostMinioUpload = 'secure/minio/upload';
 
   @override
   Dio get client {
@@ -67,14 +71,22 @@ class SurveyAmiApiImpl implements SurveyAmiApi {
   }
 
   @override
-  Future<Either<Failure, Response>> postGarduTagging() {
-    // TODO: implement postGarduTagging
-    throw UnimplementedError();
+  Future<Either<Failure, Response>> postGarduTagging(SubstationReq data) {
+    return call(
+      clientWithToken.post(pathPostGarduTagging, data: data.toJson()),
+    );
   }
 
   @override
   Future<Either<Failure, Response>> postPelangganTagging() {
     // TODO: implement postPelangganTagging
     throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<Failure, Response>> postMinioUpload(String id, String filePath) async {
+    var formData = FormData.fromMap({'id': id, 'file': await MultipartFile.fromFile(filePath, filename: basename(filePath))});
+
+    return call(clientWithToken.post(pathPostMinioUpload, data: formData));
   }
 }

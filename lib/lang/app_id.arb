@@ -51,5 +51,9 @@
   "dataCannotEmptyMessage": "data tidak boleh kosong",
   "unknownError": "terjadi kesalahan yang tidak diketahui",
   "unauthorizedMessage": "maaf sesi anda telah berakhir, silahkan login kembali",
-  "resetConfirmationMessage": "semua perubahan data tidak akan disimpan, apakah Anda yakin?"
+  "resetConfirmationMessage": "semua perubahan data tidak akan disimpan, apakah Anda yakin?",
+  "takePhoto": "ambil foto",
+  "changePhoto": "ganti photo",
+  "surveyMustAttachPhotoMessage": "survei harus melampirkan foto",
+  "taggingDataCannotEmptyMessage": "data tagging tidak boleh kosong"
 }

@@ -22,6 +22,7 @@ class LocationState extends Cubit<MainState> {
       /// * accessing the position and request users of the
       /// * App to enable the location services.
       emit(AlertState(Failure.failNoLocationService()));
+      emit(DataState(null));
       return;
     }
 
@@ -34,6 +35,7 @@ class LocationState extends Cubit<MainState> {
         /// * returned true. According to Android guidelines
         /// * your App should show an explanatory UI now.
         emit(AlertState(Failure.failLocationpermissionDenied()));
+        emit(DataState(null));
         return;
       }
     }
@@ -41,6 +43,7 @@ class LocationState extends Cubit<MainState> {
     if (permission == LocationPermission.deniedForever) {
       /// *  Permissions are denied forever, handle appropriately.
       emit(AlertState(Failure.failLocationpermissionDeniedForever()));
+      emit(DataState(null));
       return;
     }
   }

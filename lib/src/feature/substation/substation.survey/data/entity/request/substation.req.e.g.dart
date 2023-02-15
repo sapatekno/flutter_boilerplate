@@ -7,7 +7,7 @@ part of 'substation.req.e.dart';
 // **************************************************************************
 
 abstract class _$SubstationReqECWProxy {
-  SubstationReqE akurasi(int? akurasi);
+  SubstationReqE akurasi(double? akurasi);
 
   SubstationReqE detailGardu(List<SubStationDetailReqE>? detailGardu);
 
@@ -21,6 +21,8 @@ abstract class _$SubstationReqECWProxy {
 
   SubstationReqE petugas(String? petugas);
 
+  SubstationReqE photo(String? photo);
+
   SubstationReqE surveyZoneTime(String? surveyZoneTime);
 
   SubstationReqE tanggalSurvey(String? tanggalSurvey);
@@ -32,13 +34,14 @@ abstract class _$SubstationReqECWProxy {
   /// SubstationReqE(...).copyWith(id: 12, name: "My name")
   /// ````
   SubstationReqE call({
-    int? akurasi,
+    double? akurasi,
     List<SubStationDetailReqE>? detailGardu,
     int? jumlahTrafo,
     double? latitude,
     double? longitude,
     String? nomorGardu,
     String? petugas,
+    String? photo,
     String? surveyZoneTime,
     String? tanggalSurvey,
   });
@@ -51,7 +54,7 @@ class _$SubstationReqECWProxyImpl implements _$SubstationReqECWProxy {
   final SubstationReqE _value;
 
   @override
-  SubstationReqE akurasi(int? akurasi) => this(akurasi: akurasi);
+  SubstationReqE akurasi(double? akurasi) => this(akurasi: akurasi);
 
   @override
   SubstationReqE detailGardu(List<SubStationDetailReqE>? detailGardu) => this(detailGardu: detailGardu);
@@ -70,6 +73,9 @@ class _$SubstationReqECWProxyImpl implements _$SubstationReqECWProxy {
 
   @override
   SubstationReqE petugas(String? petugas) => this(petugas: petugas);
+
+  @override
+  SubstationReqE photo(String? photo) => this(photo: photo);
 
   @override
   SubstationReqE surveyZoneTime(String? surveyZoneTime) => this(surveyZoneTime: surveyZoneTime);
@@ -93,6 +99,7 @@ class _$SubstationReqECWProxyImpl implements _$SubstationReqECWProxy {
     Object? longitude = const $CopyWithPlaceholder(),
     Object? nomorGardu = const $CopyWithPlaceholder(),
     Object? petugas = const $CopyWithPlaceholder(),
+    Object? photo = const $CopyWithPlaceholder(),
     Object? surveyZoneTime = const $CopyWithPlaceholder(),
     Object? tanggalSurvey = const $CopyWithPlaceholder(),
   }) {
@@ -100,7 +107,7 @@ class _$SubstationReqECWProxyImpl implements _$SubstationReqECWProxy {
       akurasi: akurasi == const $CopyWithPlaceholder()
           ? _value.akurasi
           // ignore: cast_nullable_to_non_nullable
-          : akurasi as int?,
+          : akurasi as double?,
       detailGardu: detailGardu == const $CopyWithPlaceholder()
           ? _value.detailGardu
           // ignore: cast_nullable_to_non_nullable
@@ -125,6 +132,10 @@ class _$SubstationReqECWProxyImpl implements _$SubstationReqECWProxy {
           ? _value.petugas
           // ignore: cast_nullable_to_non_nullable
           : petugas as String?,
+      photo: photo == const $CopyWithPlaceholder()
+          ? _value.photo
+          // ignore: cast_nullable_to_non_nullable
+          : photo as String?,
       surveyZoneTime: surveyZoneTime == const $CopyWithPlaceholder()
           ? _value.surveyZoneTime
           // ignore: cast_nullable_to_non_nullable

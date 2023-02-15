@@ -8,13 +8,14 @@ part 'substation.req.g.dart';
 @CopyWith()
 @JsonSerializable(explicitToJson: true)
 class SubstationReq extends Equatable {
-  final int? akurasi;
+  final double? akurasi;
   final List<SubStationDetailReq>? detailGardu;
   final int? jumlahTrafo;
   final double? latitude;
   final double? longitude;
   final String? nomorGardu;
   final String? petugas;
+  final String? photo;
   final String? surveyZoneTime;
   final String? tanggalSurvey;
 
@@ -26,6 +27,7 @@ class SubstationReq extends Equatable {
     required this.longitude,
     required this.nomorGardu,
     required this.petugas,
+    required this.photo,
     required this.surveyZoneTime,
     required this.tanggalSurvey,
   });

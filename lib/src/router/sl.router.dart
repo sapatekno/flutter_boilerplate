@@ -16,6 +16,8 @@ import '../feature/app/data/source/network/client/http.client.dart';
 import '../feature/auth/auth.login/presenter/state/login.state.dart';
 import '../feature/auth/data/repository/auth.repo.dart';
 import '../feature/auth/data/repository/impl/auth.repo.impl.dart';
+import '../feature/file/data/repository/file.repo.dart';
+import '../feature/file/data/repository/impl/file.repo.impl.dart';
 import '../feature/location/presenter/state/location.state.dart';
 import '../feature/substation/substation.trafo/presenter/state/trafo.state.dart';
 import '../util/crypto.util.dart';
@@ -51,10 +53,11 @@ Future<void> init(Config config) async {
   /// * Repositories
   sl.registerLazySingleton<AuthRepo>(() => AuthRepoImpl(sl()));
   sl.registerLazySingleton<SubStationRepo>(() => SubStationRepoImpl(sl()));
+  sl.registerLazySingleton<FileRepo>(() => FileRepoImpl(sl()));
 
   /// * Cubit (State)
   sl.registerFactory<LoginState>(() => LoginState(sl(), sl(), sl(), sl()));
   sl.registerLazySingleton<LocationState>(() => LocationState());
   sl.registerFactory<TrafoState>(() => TrafoState());
-  sl.registerFactory<SubStationSurveyState>(() => SubStationSurveyState(sl()));
+  sl.registerFactory<SubStationSurveyState>(() => SubStationSurveyState(sl(), sl(), sl()));
 }

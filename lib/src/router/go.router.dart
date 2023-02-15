@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:go_router_flow/go_router_flow.dart';
+import 'package:surveyami/src/feature/app/presenter/widget/photo_viewer.widget.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
 import '../feature/auth/auth.login/presenter/page/login.page.dart';
@@ -13,6 +15,7 @@ String pathHome = '/home';
 String pathTalker = '/talker';
 String pathTrafo = '/trafo';
 String pathTrafoForm = '/trafo/form';
+String pathPhotoViewer = '/photo/view';
 
 final goRouter = GoRouter(
   routes: [
@@ -40,6 +43,13 @@ final goRouter = GoRouter(
       builder: (context, state) {
         var data = state.extra as SubStationDetailReqE?;
         return TrafoFormPage(data);
+      },
+    ),
+    GoRoute(
+      path: pathPhotoViewer,
+      builder: (context, state) {
+        var data = state.extra as ImageProvider;
+        return PhotoViewerWidget(imageProvider: data);
       },
     ),
   ],

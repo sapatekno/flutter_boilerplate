@@ -51,5 +51,9 @@
   "dataCannotEmptyMessage": "data cannot be empty",
   "unknownError": "an unknown error occurred",
   "unauthorizedMessage": "sorry your session has ended, please login again",
-  "resetConfirmationMessage": "all data changes will not be saved, are you sure?"
+  "resetConfirmationMessage": "all data changes will not be saved, are you sure?",
+  "takePhoto": "take a photo",
+  "changePhoto": "change photo",
+  "surveyMustAttachPhotoMessage": "the survey must attach a photo",
+  "taggingDataCannotEmptyMessage": "tagging data cannot be empty"
 }

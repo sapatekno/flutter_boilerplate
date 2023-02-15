@@ -8,13 +8,14 @@ part 'substation.req.e.g.dart';
 
 @CopyWith()
 class SubstationReqE extends Equatable {
-  final int? akurasi;
+  final double? akurasi;
   final List<SubStationDetailReqE>? detailGardu;
   final int? jumlahTrafo;
   final double? latitude;
   final double? longitude;
   final String? nomorGardu;
   final String? petugas;
+  final String? photo;
   final String? surveyZoneTime;
   final String? tanggalSurvey;
 
@@ -26,9 +27,25 @@ class SubstationReqE extends Equatable {
     required this.longitude,
     required this.nomorGardu,
     required this.petugas,
+    required this.photo,
     required this.surveyZoneTime,
     required this.tanggalSurvey,
   });
+
+  factory SubstationReqE.initial() {
+    return const SubstationReqE(
+      akurasi: 0,
+      detailGardu: [],
+      jumlahTrafo: 0,
+      latitude: 0,
+      longitude: 0,
+      nomorGardu: '',
+      petugas: '',
+      photo: '',
+      surveyZoneTime: '',
+      tanggalSurvey: '',
+    );
+  }
 
   factory SubstationReqE.fromSubstationReq(SubstationReq data) {
     return SubstationReqE(
@@ -39,6 +56,7 @@ class SubstationReqE extends Equatable {
       longitude: data.longitude,
       nomorGardu: data.nomorGardu,
       petugas: data.petugas,
+      photo: data.photo,
       surveyZoneTime: data.surveyZoneTime,
       tanggalSurvey: data.tanggalSurvey,
     );
@@ -53,6 +71,7 @@ class SubstationReqE extends Equatable {
       longitude: longitude,
       nomorGardu: nomorGardu,
       petugas: petugas,
+      photo: photo,
       surveyZoneTime: surveyZoneTime,
       tanggalSurvey: tanggalSurvey,
     );
