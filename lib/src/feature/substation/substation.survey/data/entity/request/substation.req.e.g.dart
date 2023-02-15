@@ -9,7 +9,7 @@ part of 'substation.req.e.dart';
 abstract class _$SubstationReqECWProxy {
   SubstationReqE akurasi(int? akurasi);
 
-  SubstationReqE detailGardu(List<SubStationDetailReq>? detailGardu);
+  SubstationReqE detailGardu(List<SubStationDetailReqE>? detailGardu);
 
   SubstationReqE jumlahTrafo(int? jumlahTrafo);
 
@@ -33,7 +33,7 @@ abstract class _$SubstationReqECWProxy {
   /// ````
   SubstationReqE call({
     int? akurasi,
-    List<SubStationDetailReq>? detailGardu,
+    List<SubStationDetailReqE>? detailGardu,
     int? jumlahTrafo,
     double? latitude,
     double? longitude,
@@ -54,7 +54,7 @@ class _$SubstationReqECWProxyImpl implements _$SubstationReqECWProxy {
   SubstationReqE akurasi(int? akurasi) => this(akurasi: akurasi);
 
   @override
-  SubstationReqE detailGardu(List<SubStationDetailReq>? detailGardu) => this(detailGardu: detailGardu);
+  SubstationReqE detailGardu(List<SubStationDetailReqE>? detailGardu) => this(detailGardu: detailGardu);
 
   @override
   SubstationReqE jumlahTrafo(int? jumlahTrafo) => this(jumlahTrafo: jumlahTrafo);
@@ -104,7 +104,7 @@ class _$SubstationReqECWProxyImpl implements _$SubstationReqECWProxy {
       detailGardu: detailGardu == const $CopyWithPlaceholder()
           ? _value.detailGardu
           // ignore: cast_nullable_to_non_nullable
-          : detailGardu as List<SubStationDetailReq>?,
+          : detailGardu as List<SubStationDetailReqE>?,
       jumlahTrafo: jumlahTrafo == const $CopyWithPlaceholder()
           ? _value.jumlahTrafo
           // ignore: cast_nullable_to_non_nullable

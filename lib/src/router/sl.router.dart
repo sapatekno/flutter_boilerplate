@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:surveyami/src/feature/substation/substation.survey/presenter/state/substation_survey.state.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
 import '../config/config.dart';
@@ -13,6 +14,7 @@ import '../feature/auth/auth.login/presenter/state/login.state.dart';
 import '../feature/auth/data/repository/auth.repo.dart';
 import '../feature/auth/data/repository/impl/auth.repo.impl.dart';
 import '../feature/location/presenter/state/location.state.dart';
+import '../feature/substation/substation.trafo/presenter/state/trafo.state.dart';
 import '../util/crypto.util.dart';
 import '../util/internet.util.dart';
 import '../util/logger.util.dart';
@@ -46,4 +48,6 @@ Future<void> init(Config config) async {
   /// * Cubit (State)
   sl.registerFactory<LoginState>(() => LoginState(sl(), sl(), sl()));
   sl.registerLazySingleton<LocationState>(() => LocationState());
+  sl.registerFactory<TrafoState>(() => TrafoState());
+  sl.registerFactory<SubStationSurveyState>(() => SubStationSurveyState());
 }

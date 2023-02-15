@@ -37,5 +37,15 @@
   "failLocationpermissionDenied": "izin akses lokasi ditolak, aplikasi memerlukan akses lokasi untuk melanjutkan proses",
   "loading": "memuat...",
   "substationType": "tipe gardu",
-  "description": "deskripsi"
+  "description": "deskripsi",
+  "numberOfTrafo": "jumlah trafo",
+  "trafoData": "data trafo",
+  "add": "tambah",
+  "edit": "edit",
+  "trafoNumber": "nomor trafo",
+  "trafoCapacity": "kapasitas trafo",
+  "numberOfChannels": "jumlah saluran",
+  "deleteConfirmation": "anda yakin ingin menghapus data?",
+  "saveConfirmation": "anda yakin ingin menyimpan data?",
+  "dataEmptyMessage": "data masih kosong"
 }

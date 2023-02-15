@@ -37,5 +37,15 @@
   "failLocationpermissionDenied": "location access permission denied, app needs location access to continue the process",
   "loading": "loading...",
   "substationType": "substation type",
-  "description": "description"
+  "description": "description",
+  "numberOfTrafo": "number of trafo",
+  "trafoData": "trafo data",
+  "add": "add",
+  "edit": "edit",
+  "trafoNumber": "trafo number",
+  "trafoCapacity": "trafo capacity",
+  "numberOfChannels": "number of channels",
+  "deleteConfirmation": "are you sure you want to delete data?",
+  "saveConfirmation": "are you sure you want to save data?",
+  "dataEmptyMessage": "data is still empty"
 }

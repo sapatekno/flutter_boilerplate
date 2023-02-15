@@ -2,14 +2,14 @@ import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../model/request/substation.req.dart';
-import '../../model/request/substation_detail.req.dart';
+import 'substation_detail.req.e.dart';
 
 part 'substation.req.e.g.dart';
 
 @CopyWith()
 class SubstationReqE extends Equatable {
   final int? akurasi;
-  final List<SubStationDetailReq>? detailGardu;
+  final List<SubStationDetailReqE>? detailGardu;
   final int? jumlahTrafo;
   final double? latitude;
   final double? longitude;
@@ -33,7 +33,7 @@ class SubstationReqE extends Equatable {
   factory SubstationReqE.fromSubstationReq(SubstationReq data) {
     return SubstationReqE(
       akurasi: data.akurasi,
-      detailGardu: data.detailGardu,
+      detailGardu: data.detailGardu == null ? null : data.detailGardu!.map((e) => SubStationDetailReqE.fromSubStationDetailReq(e)).toList(),
       jumlahTrafo: data.jumlahTrafo,
       latitude: data.latitude,
       longitude: data.longitude,
@@ -47,7 +47,7 @@ class SubstationReqE extends Equatable {
   SubstationReq toSubstationReq() {
     return SubstationReq(
       akurasi: akurasi,
-      detailGardu: detailGardu,
+      detailGardu: detailGardu == null ? null : detailGardu!.map((e) => e.toSubStationDetailReq()).toList(),
       jumlahTrafo: jumlahTrafo,
       latitude: latitude,
       longitude: longitude,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_local.dart';
-import 'package:go_router/go_router.dart';
+import 'package:go_router_flow/go_router_flow.dart';
 import 'package:surveyami/src/feature/app/presenter/widget/dialog.widget.dart';
 import 'package:surveyami/src/feature/customer/customer.survey/presenter/page/customer_survey.page.dart';
 import 'package:surveyami/src/feature/substation/substation.survey/presenter/page/substation_survey.page.dart';
@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
     listHomeData = [
       HomeData(
         title: AppLocalizations.of(context)!.substationSurvey,
-        page: const SubStationSurveyPage(),
+        page: SubStationSurveyPage(),
       ),
       HomeData(
         title: AppLocalizations.of(context)!.customerSurvey,
