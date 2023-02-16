@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:surveyami/src/feature/customer/customer.survey/presenter/state/customer_survey.state.dart';
 import 'package:surveyami/src/feature/substation/data/repository/impl/subsatation.repo.impl.dart';
 import 'package:surveyami/src/feature/substation/data/repository/substation.repo.dart';
 import 'package:surveyami/src/feature/substation/substation.survey/presenter/state/substation_survey.state.dart';
@@ -16,6 +17,8 @@ import '../feature/app/data/source/network/client/http.client.dart';
 import '../feature/auth/auth.login/presenter/state/login.state.dart';
 import '../feature/auth/data/repository/auth.repo.dart';
 import '../feature/auth/data/repository/impl/auth.repo.impl.dart';
+import '../feature/customer/data/repository/customer.repo.dart';
+import '../feature/customer/data/repository/impl/customer.repo.impl.dart';
 import '../feature/file/data/repository/file.repo.dart';
 import '../feature/file/data/repository/impl/file.repo.impl.dart';
 import '../feature/location/presenter/state/location.state.dart';
@@ -54,10 +57,12 @@ Future<void> init(Config config) async {
   sl.registerLazySingleton<AuthRepo>(() => AuthRepoImpl(sl()));
   sl.registerLazySingleton<SubStationRepo>(() => SubStationRepoImpl(sl()));
   sl.registerLazySingleton<FileRepo>(() => FileRepoImpl(sl()));
+  sl.registerLazySingleton<CustomerRepo>(() => CustomerRepoImpl(sl()));
 
   /// * Cubit (State)
   sl.registerFactory<LoginState>(() => LoginState(sl(), sl(), sl(), sl()));
   sl.registerLazySingleton<LocationState>(() => LocationState());
   sl.registerFactory<TrafoState>(() => TrafoState());
   sl.registerFactory<SubStationSurveyState>(() => SubStationSurveyState(sl(), sl(), sl()));
+  sl.registerFactory<CustomerSurveyState>(() => CustomerSurveyState(sl(), sl()));
 }

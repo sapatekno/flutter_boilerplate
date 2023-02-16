@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nested/nested.dart';
+import 'package:surveyami/src/feature/customer/customer.survey/presenter/state/customer_survey.state.dart';
 
 import '../feature/auth/auth.login/presenter/state/login.state.dart';
 import '../feature/location/presenter/state/location.state.dart';
@@ -14,6 +15,7 @@ class CubitRouter {
       BlocProvider<LocationState>(create: (_) => sl.get<LocationState>(), lazy: true),
       BlocProvider<TrafoState>(create: (_) => sl.get<TrafoState>(), lazy: true),
       BlocProvider<SubStationSurveyState>(create: (_) => sl.get<SubStationSurveyState>(), lazy: true),
+      BlocProvider<CustomerSurveyState>(create: (_) => sl.get<CustomerSurveyState>(), lazy: true),
     ];
   }
 }

@@ -1,4 +1,3 @@
-import 'package:dio_log/dio_log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_local.dart';
 import 'package:go_router_flow/go_router_flow.dart';
@@ -28,7 +27,8 @@ class _HomePageState extends State<HomePage> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      showDebugBtn(context, btnColor: Theme.of(context).primaryColor);
+      /// * Used only for debugging
+      /// showDebugBtn(context, btnColor: Theme.of(context).primaryColor);
     });
   }
 
@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
       ),
       HomeData(
         title: AppLocalizations.of(context)!.customerSurvey,
-        page: const CustomerSurveyPage(),
+        page: CustomerSurveyPage(),
       ),
     ];
 
@@ -70,14 +70,14 @@ class _HomePageState extends State<HomePage> {
       ),
       body: listHomeData[currentIndex].page,
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.charging_station),
-            label: 'Gardu',
+            icon: const Icon(Icons.charging_station),
+            label: AppLocalizations.of(context)!.substation.toTitleCase(),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Pelanggan',
+            icon: const Icon(Icons.person),
+            label: AppLocalizations.of(context)!.customer.toTitleCase(),
           ),
         ],
         currentIndex: currentIndex,

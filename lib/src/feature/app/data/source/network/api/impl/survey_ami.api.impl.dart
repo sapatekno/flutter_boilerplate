@@ -1,10 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:path/path.dart';
-import 'package:surveyami/src/feature/substation/substation.survey/data/model/request/substation.req.dart';
 
 import '../../../../../../../config/config.dart';
 import '../../../../../../auth/auth.login/data/model/request/login.req.dart';
+import '../../../../../../customer/data/model/request/customer.req.dart';
+import '../../../../../../substation/substation.survey/data/model/request/substation.req.dart';
 import '../../../../entity/failure.dart';
 import '../../../../session/session.dart';
 import '../../client/http.client.dart';
@@ -65,9 +66,10 @@ class SurveyAmiApiImpl implements SurveyAmiApi {
   }
 
   @override
-  Future<Either<Failure, Response>> getPelangganById() {
-    // TODO: implement getPelangganById
-    throw UnimplementedError();
+  Future<Either<Failure, Response>> getPelangganById(String id) {
+    return call(
+      clientWithToken.get(pathGetPelangganById, queryParameters: {'id': id}),
+    );
   }
 
   @override
@@ -78,9 +80,10 @@ class SurveyAmiApiImpl implements SurveyAmiApi {
   }
 
   @override
-  Future<Either<Failure, Response>> postPelangganTagging() {
-    // TODO: implement postPelangganTagging
-    throw UnimplementedError();
+  Future<Either<Failure, Response>> postPelangganTagging(CustomerReq data) {
+    return call(
+      clientWithToken.post(pathPostPelangganTagging, data: data.toJson()),
+    );
   }
 
   @override

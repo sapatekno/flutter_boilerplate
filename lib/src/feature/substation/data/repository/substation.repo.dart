@@ -7,5 +7,5 @@ import '../../substation.survey/data/model/request/substation.req.dart';
 abstract class SubStationRepo {
   Future<Either<Failure, SubStationResE>> getGarduById(String id);
 
-  Future<Either<Failure, bool>> postGarduTagging(SubstationReq data);
+  Future<Either<Failure, String>> postGarduTagging(SubstationReq data);
 }

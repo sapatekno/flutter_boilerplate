@@ -14,6 +14,11 @@ class TimeUtil {
 
   /// * Desired server format is YYYY-MM-DDThh:mm:ssTZD
   static String dateServerFormat(DateTime time) {
-    return DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(time);
+    var duration = time.timeZoneOffset;
+    if (duration.isNegative) {
+      return ("${DateFormat("yyyy-MM-ddTHH:mm:ss").format(time)}-${duration.inHours.toString().padLeft(2, '0')}:${(duration.inMinutes - (duration.inHours * 60)).toString().padLeft(2, '0')}");
+    } else {
+      return ("${DateFormat("yyyy-MM-ddTHH:mm:ss").format(time)}+${duration.inHours.toString().padLeft(2, '0')}:${(duration.inMinutes - (duration.inHours * 60)).toString().padLeft(2, '0')}");
+    }
   }
 }

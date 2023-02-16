@@ -110,7 +110,7 @@ class SubStationSurveyPage extends StatelessWidget {
             ),
           );
         },
-        listenWhen: (prev, state) => state is AlertState<Failure> || state is UnauthorizedState,
+        listenWhen: (prev, state) => state is AlertState || state is UnauthorizedState,
         listener: (context, state) => onListener(context, state));
   }
 
@@ -120,7 +120,17 @@ class SubStationSurveyPage extends StatelessWidget {
       showInfoDialog(
         context,
         null,
-        Failure.getMessage(context, failure.message ?? "unknown"),
+        Failure.getMessage(context, failure.message ?? "unknownError"),
+        AppLocalizations.of(context)!.ok,
+        null,
+      );
+    }
+
+    if (state is AlertState<String>) {
+      showInfoDialog(
+        context,
+        null,
+        Failure.getMessage(context, state.data),
         AppLocalizations.of(context)!.ok,
         null,
       );

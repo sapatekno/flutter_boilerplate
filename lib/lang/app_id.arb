@@ -55,5 +55,7 @@
   "takePhoto": "ambil foto",
   "changePhoto": "ganti photo",
   "surveyMustAttachPhotoMessage": "survei harus melampirkan foto",
-  "taggingDataCannotEmptyMessage": "data tagging tidak boleh kosong"
+  "taggingDataCannotEmptyMessage": "data tagging tidak boleh kosong",
+  "substation": "gardu",
+  "customer": "pelanggan"
 }

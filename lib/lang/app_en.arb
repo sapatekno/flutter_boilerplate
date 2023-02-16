@@ -55,5 +55,7 @@
   "takePhoto": "take a photo",
   "changePhoto": "change photo",
   "surveyMustAttachPhotoMessage": "the survey must attach a photo",
-  "taggingDataCannotEmptyMessage": "tagging data cannot be empty"
+  "taggingDataCannotEmptyMessage": "tagging data cannot be empty",
+  "substation": "substation",
+  "customer": "customer"
 }

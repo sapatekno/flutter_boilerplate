@@ -76,7 +76,7 @@ class SubStationSurveyState extends Cubit<MainState> {
     emit(DataState(true));
   }
 
-  void saveSurvey(Position currentPosition) async {
+  void saveSurvey(Position position) async {
     emit(LoadState());
 
     var uploadPhoto = await fileRepo.postMinioUpload(dataReq!.nomorGardu!, localPhotoPath!);
@@ -92,16 +92,30 @@ class SubStationSurveyState extends Cubit<MainState> {
       },
       (uploadPath) async {
         dataReq = dataReq?.copyWith(
-          akurasi: currentPosition.accuracy,
-          latitude: currentPosition.latitude,
-          longitude: currentPosition.longitude,
+          akurasi: position.accuracy,
+          latitude: position.latitude,
+          longitude: position.longitude,
           photo: uploadPath,
         );
 
-        await subStationRepo.postGarduTagging(dataReq!.toSubstationReq());
+        /// * Simpan hasil survei ke server
+        var saveSurvey = await subStationRepo.postGarduTagging(dataReq!.toSubstationReq());
+        saveSurvey.fold(
+          (failure) {
+            if (Failure.isUnauthorized(failure.error)) {
+              emit(UnauthorizedState());
+              emit(DataState(true));
+              return;
+            }
+            emit(AlertState(failure));
+            emit(DataState(true));
+          },
+          (data) {
+            initState();
+            emit(AlertState(data));
+          },
+        );
       },
     );
-
-    initState();
   }
 }
