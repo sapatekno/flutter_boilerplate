@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:dio_log/dio_log.dart';
 import 'package:talker_dio_logger/talker_dio_logger.dart';
 
 class HttpClient {
@@ -7,6 +8,7 @@ class HttpClient {
 
   Dio get client {
     Dio dio = Dio(_getOptions());
+    dio.interceptors.add(DioLogInterceptor());
     dio.interceptors.add(
       TalkerDioLogger(
         settings: const TalkerDioLoggerSettings(

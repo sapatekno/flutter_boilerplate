@@ -1,3 +1,4 @@
+import 'package:dio_log/dio_log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_local.dart';
 import 'package:go_router_flow/go_router_flow.dart';
@@ -21,6 +22,15 @@ class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
 
   List<HomeData> listHomeData = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showDebugBtn(context, btnColor: Theme.of(context).primaryColor);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +58,7 @@ class _HomePageState extends State<HomePage> {
                 AppLocalizations.of(context)!.logoutConfirmation,
                 AppLocalizations.of(context)!.yes,
                 AppLocalizations.of(context)!.no,
-                () async {
+                    () async {
                   var session = sl.get<Session>();
                   await session.remove();
                   context.go(pathInitial);
