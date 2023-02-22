@@ -11,7 +11,14 @@ class CustomerReqE extends Equatable {
   final String? idPel;
   final double? latitude;
   final double? longitude;
+  final String? merekMeter;
+  final String? nomorMeter;
   final String? petugas;
+  final String? photo;
+  final String? rst;
+  final String? sl;
+  final double? sr;
+  final double? standAkhir;
   final String? surveyZoneTime;
   final String? tanggalSurvey;
 
@@ -20,7 +27,14 @@ class CustomerReqE extends Equatable {
     required this.idPel,
     required this.latitude,
     required this.longitude,
+    required this.merekMeter,
+    required this.nomorMeter,
     required this.petugas,
+    required this.photo,
+    required this.rst,
+    required this.sl,
+    required this.sr,
+    required this.standAkhir,
     required this.surveyZoneTime,
     required this.tanggalSurvey,
   });
@@ -34,6 +48,13 @@ class CustomerReqE extends Equatable {
       petugas: data.petugas,
       surveyZoneTime: data.surveyZoneTime,
       tanggalSurvey: data.tanggalSurvey,
+      merekMeter: data.merekMeter,
+      nomorMeter: data.nomorMeter,
+      photo: data.photo,
+      rst: data.rst,
+      sl: data.sl,
+      sr: data.sr,
+      standAkhir: data.standAkhir,
     );
   }
 
@@ -43,7 +64,14 @@ class CustomerReqE extends Equatable {
       idPel: idPel,
       latitude: latitude,
       longitude: longitude,
+      merekMeter: merekMeter,
+      nomorMeter: nomorMeter,
       petugas: petugas,
+      photo: photo,
+      rst: rst,
+      sl: sl,
+      sr: sr,
+      standAkhir: standAkhir,
       surveyZoneTime: surveyZoneTime,
       tanggalSurvey: tanggalSurvey,
     );
@@ -61,6 +89,13 @@ class CustomerReqE extends Equatable {
       petugas: '',
       surveyZoneTime: '',
       tanggalSurvey: '',
+      merekMeter: '',
+      nomorMeter: '',
+      photo: '',
+      rst: '',
+      sl: '',
+      sr: 0,
+      standAkhir: 0,
     );
   }
 }

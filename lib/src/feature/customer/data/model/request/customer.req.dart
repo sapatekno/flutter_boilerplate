@@ -11,7 +11,14 @@ class CustomerReq extends Equatable {
   final String? idPel;
   final double? latitude;
   final double? longitude;
+  final String? merekMeter;
+  final String? nomorMeter;
   final String? petugas;
+  final String? photo;
+  final String? rst;
+  final String? sl;
+  final double? sr;
+  final double? standAkhir;
   final String? surveyZoneTime;
   final String? tanggalSurvey;
 
@@ -20,7 +27,14 @@ class CustomerReq extends Equatable {
     required this.idPel,
     required this.latitude,
     required this.longitude,
+    required this.merekMeter,
+    required this.nomorMeter,
     required this.petugas,
+    required this.photo,
+    required this.rst,
+    required this.sl,
+    required this.sr,
+    required this.standAkhir,
     required this.surveyZoneTime,
     required this.tanggalSurvey,
   });

@@ -15,7 +15,21 @@ abstract class _$CustomerReqECWProxy {
 
   CustomerReqE longitude(double? longitude);
 
+  CustomerReqE merekMeter(String? merekMeter);
+
+  CustomerReqE nomorMeter(String? nomorMeter);
+
   CustomerReqE petugas(String? petugas);
+
+  CustomerReqE photo(String? photo);
+
+  CustomerReqE rst(String? rst);
+
+  CustomerReqE sl(String? sl);
+
+  CustomerReqE sr(double? sr);
+
+  CustomerReqE standAkhir(double? standAkhir);
 
   CustomerReqE surveyZoneTime(String? surveyZoneTime);
 
@@ -32,7 +46,14 @@ abstract class _$CustomerReqECWProxy {
     String? idPel,
     double? latitude,
     double? longitude,
+    String? merekMeter,
+    String? nomorMeter,
     String? petugas,
+    String? photo,
+    String? rst,
+    String? sl,
+    double? sr,
+    double? standAkhir,
     String? surveyZoneTime,
     String? tanggalSurvey,
   });
@@ -57,7 +78,28 @@ class _$CustomerReqECWProxyImpl implements _$CustomerReqECWProxy {
   CustomerReqE longitude(double? longitude) => this(longitude: longitude);
 
   @override
+  CustomerReqE merekMeter(String? merekMeter) => this(merekMeter: merekMeter);
+
+  @override
+  CustomerReqE nomorMeter(String? nomorMeter) => this(nomorMeter: nomorMeter);
+
+  @override
   CustomerReqE petugas(String? petugas) => this(petugas: petugas);
+
+  @override
+  CustomerReqE photo(String? photo) => this(photo: photo);
+
+  @override
+  CustomerReqE rst(String? rst) => this(rst: rst);
+
+  @override
+  CustomerReqE sl(String? sl) => this(sl: sl);
+
+  @override
+  CustomerReqE sr(double? sr) => this(sr: sr);
+
+  @override
+  CustomerReqE standAkhir(double? standAkhir) => this(standAkhir: standAkhir);
 
   @override
   CustomerReqE surveyZoneTime(String? surveyZoneTime) => this(surveyZoneTime: surveyZoneTime);
@@ -78,7 +120,14 @@ class _$CustomerReqECWProxyImpl implements _$CustomerReqECWProxy {
     Object? idPel = const $CopyWithPlaceholder(),
     Object? latitude = const $CopyWithPlaceholder(),
     Object? longitude = const $CopyWithPlaceholder(),
+    Object? merekMeter = const $CopyWithPlaceholder(),
+    Object? nomorMeter = const $CopyWithPlaceholder(),
     Object? petugas = const $CopyWithPlaceholder(),
+    Object? photo = const $CopyWithPlaceholder(),
+    Object? rst = const $CopyWithPlaceholder(),
+    Object? sl = const $CopyWithPlaceholder(),
+    Object? sr = const $CopyWithPlaceholder(),
+    Object? standAkhir = const $CopyWithPlaceholder(),
     Object? surveyZoneTime = const $CopyWithPlaceholder(),
     Object? tanggalSurvey = const $CopyWithPlaceholder(),
   }) {
@@ -99,10 +148,38 @@ class _$CustomerReqECWProxyImpl implements _$CustomerReqECWProxy {
           ? _value.longitude
           // ignore: cast_nullable_to_non_nullable
           : longitude as double?,
+      merekMeter: merekMeter == const $CopyWithPlaceholder()
+          ? _value.merekMeter
+          // ignore: cast_nullable_to_non_nullable
+          : merekMeter as String?,
+      nomorMeter: nomorMeter == const $CopyWithPlaceholder()
+          ? _value.nomorMeter
+          // ignore: cast_nullable_to_non_nullable
+          : nomorMeter as String?,
       petugas: petugas == const $CopyWithPlaceholder()
           ? _value.petugas
           // ignore: cast_nullable_to_non_nullable
           : petugas as String?,
+      photo: photo == const $CopyWithPlaceholder()
+          ? _value.photo
+          // ignore: cast_nullable_to_non_nullable
+          : photo as String?,
+      rst: rst == const $CopyWithPlaceholder()
+          ? _value.rst
+          // ignore: cast_nullable_to_non_nullable
+          : rst as String?,
+      sl: sl == const $CopyWithPlaceholder()
+          ? _value.sl
+          // ignore: cast_nullable_to_non_nullable
+          : sl as String?,
+      sr: sr == const $CopyWithPlaceholder()
+          ? _value.sr
+          // ignore: cast_nullable_to_non_nullable
+          : sr as double?,
+      standAkhir: standAkhir == const $CopyWithPlaceholder()
+          ? _value.standAkhir
+          // ignore: cast_nullable_to_non_nullable
+          : standAkhir as double?,
       surveyZoneTime: surveyZoneTime == const $CopyWithPlaceholder()
           ? _value.surveyZoneTime
           // ignore: cast_nullable_to_non_nullable
