@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_local.dart';
+import 'package:lottie/lottie.dart';
 import 'package:sizer/sizer.dart';
 import 'package:surveyami/src/util/string.util.dart';
 
@@ -20,23 +21,26 @@ class FailureWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            Icons.error,
-            color: Colors.red,
-            size: 40.w,
+          Lottie.asset(
+            'assets/lottiefiles/error.zip',
+            frameRate: FrameRate(30),
+            filterQuality: FilterQuality.high,
+            width: 50.w,
+            fit: BoxFit.fitWidth,
           ),
-          SizedBox(height: 4.h),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 2.h),
+            padding: EdgeInsets.symmetric(horizontal: 10.w),
             child: Text(
               message.toTitleCase(),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),
-          ElevatedButton(
+          SizedBox(height: 4.h),
+          ElevatedButton.icon(
+            icon: const Icon(Icons.refresh),
+            label: Text(AppLocalizations.of(context)!.retry.toTitleCase()),
             onPressed: callback,
-            child: Text(AppLocalizations.of(context)!.retry.toTitleCase()),
           ),
         ],
       ),

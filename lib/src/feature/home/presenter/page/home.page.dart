@@ -1,4 +1,3 @@
-import 'package:dio_log/dio_log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_local.dart';
 import 'package:go_router_flow/go_router_flow.dart';
@@ -29,7 +28,6 @@ class _HomePageState extends State<HomePage> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       /// * Used only for debugging
-      showDebugBtn(context, btnColor: Theme.of(context).primaryColor);
     });
   }
 
@@ -59,7 +57,7 @@ class _HomePageState extends State<HomePage> {
                 AppLocalizations.of(context)!.logoutConfirmation,
                 AppLocalizations.of(context)!.yes,
                 AppLocalizations.of(context)!.no,
-                    () async {
+                () async {
                   var session = sl.get<Session>();
                   await session.remove();
                   context.go(pathInitial);

@@ -304,7 +304,7 @@ class SubStationSurveyPage extends StatelessWidget {
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 if (result != null) {
                   // * ada penambahan
-                  cubit.updateDetailGardu(result!);
+                  cubit.updateDetailGardu(result);
                 }
               });
             },

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router_flow/go_router_flow.dart';
 import 'package:surveyami/src/feature/app/presenter/widget/photo_viewer.widget.dart';
-import 'package:talker_flutter/talker_flutter.dart';
 
 import '../feature/auth/auth.login/presenter/page/login.page.dart';
 import '../feature/home/presenter/page/home.page.dart';
@@ -18,18 +17,15 @@ String pathTrafoForm = '/trafo/form';
 String pathPhotoViewer = '/photo/view';
 
 final goRouter = GoRouter(
+  navigatorKey: sl.get<GlobalKey<NavigatorState>>(),
   routes: [
     GoRoute(
       path: pathInitial,
-      builder: (context, state) => LoginPage(),
+      builder: (context, state) => const LoginPage(),
     ),
     GoRoute(
       path: pathHome,
       builder: (context, state) => const HomePage(),
-    ),
-    GoRoute(
-      path: pathTalker,
-      builder: (context, state) => TalkerScreen(talker: sl.get<Talker>()),
     ),
     GoRoute(
       path: pathTrafo,

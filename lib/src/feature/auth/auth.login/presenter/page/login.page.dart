@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_local.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router_flow/go_router_flow.dart';
-import 'package:safe_device/safe_device.dart';
 import 'package:sizer/sizer.dart';
 import 'package:surveyami/src/util/string.util.dart';
 
@@ -27,19 +26,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      /// * Used only for debugging
-      bool isJailBroken = await SafeDevice.isJailBroken;
-      bool isRealDevice = await SafeDevice.isRealDevice;
-      bool canMockLocation = await SafeDevice.canMockLocation;
-      bool isSafeDevice = await SafeDevice.isSafeDevice;
-
-      print("is jailbroken : $isJailBroken");
-      print("is real device : $isRealDevice");
-      print("is save device : $isSafeDevice");
-      print("is mock location : $canMockLocation");
-    });
   }
 
   final formKey = GlobalKey<FormState>();
@@ -74,10 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 4.h),
-
-                  /// blockDebug(context),
                   blockLogin(context),
-
                   /// * hide because no register feature # blockRegister(context),
                 ],
               ),
@@ -214,20 +197,4 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  blockDebug(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        IconButton(
-          onPressed: () {
-            context.push(pathTalker);
-          },
-          icon: Icon(
-            Icons.bug_report,
-            color: Theme.of(context).primaryColor,
-          ),
-        ),
-      ],
-    );
-  }
 }

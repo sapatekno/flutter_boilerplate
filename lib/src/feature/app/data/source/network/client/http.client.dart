@@ -1,22 +1,16 @@
 import 'package:dio/dio.dart';
-import 'package:dio_log/dio_log.dart';
-import 'package:talker_dio_logger/talker_dio_logger.dart';
+
+import '../../../../../../util/alice.util.dart';
 
 class HttpClient {
+  final AliceUtil aliceUtil;
 
-  HttpClient();
+  HttpClient(this.aliceUtil);
 
   Dio get client {
     Dio dio = Dio(_getOptions());
-    dio.interceptors.add(DioLogInterceptor());
-    dio.interceptors.add(
-      TalkerDioLogger(
-        settings: const TalkerDioLoggerSettings(
-          printRequestHeaders: true,
-          printResponseHeaders: true,
-        ),
-      ),
-    );
+    dio.interceptors.add(aliceUtil.instance.getDioInterceptor());
+
     return dio;
   }
 

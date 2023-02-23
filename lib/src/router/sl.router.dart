@@ -1,10 +1,12 @@
+import 'package:alice/alice.dart';
+import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:surveyami/src/feature/customer/customer.survey/presenter/state/customer_survey.state.dart';
 import 'package:surveyami/src/feature/substation/data/repository/impl/subsatation.repo.impl.dart';
 import 'package:surveyami/src/feature/substation/data/repository/substation.repo.dart';
 import 'package:surveyami/src/feature/substation/substation.survey/presenter/state/substation_survey.state.dart';
-import 'package:talker_flutter/talker_flutter.dart';
+import 'package:surveyami/src/util/alice.util.dart';
 
 import '../config/config.dart';
 import '../feature/app/data/session/session.dart';
@@ -25,23 +27,24 @@ import '../feature/location/presenter/state/location.state.dart';
 import '../feature/substation/substation.trafo/presenter/state/trafo.state.dart';
 import '../util/crypto.util.dart';
 import '../util/internet.util.dart';
-import '../util/logger.util.dart';
-import '../util/talker.util.dart';
 
 final sl = GetIt.instance;
 
 Future<void> init(Config config) async {
   /// * Define Config Environment
   sl.registerSingleton<Config>(config);
+  sl.registerSingleton<GlobalKey<NavigatorState>>(GlobalKey<NavigatorState>());
+
+  /// * Define Third Parties Libraries
+  sl.registerSingleton<Alice>(Alice());
 
   /// * Utilities
-  sl.registerSingleton<Talker>(TalkerUtil().talker);
+  sl.registerSingleton<AliceUtil>(AliceUtil(sl()));
   sl.registerSingleton<InternetUtil>(InternetUtil());
-  sl.registerSingleton<LoggerUtil>(LoggerUtil());
   sl.registerSingleton<CryptoUtil>(CryptoUtil());
 
   /// * Client (Network & Local)
-  sl.registerSingleton<HttpClient>(HttpClient());
+  sl.registerSingleton<HttpClient>(HttpClient(sl()));
   sl.registerSingleton<SharedPreferences>(await LocalClient().client);
 
   /// * Preferences
