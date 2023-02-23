@@ -53,7 +53,7 @@ class LocationState extends Cubit<MainState> {
     await checkService();
 
     /// * Add delay to hold user for spamming get location
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(milliseconds: 600));
     currentPosition = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     emit(DataState(currentPosition));
   }
