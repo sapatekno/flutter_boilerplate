@@ -57,5 +57,13 @@
   "surveyMustAttachPhotoMessage": "survei harus melampirkan foto",
   "taggingDataCannotEmptyMessage": "data tagging tidak boleh kosong",
   "substation": "gardu",
-  "customer": "pelanggan"
+  "customer": "pelanggan",
+  "meterBrand": "merek meter",
+  "meterNumber": "nomer meter",
+  "rst": "rst",
+  "sl": "sl",
+  "sr": "sr",
+  "finalStand": "stand akhir",
+  "rstMustSelected": "bidang RST belum dipilih",
+  "srMustSelected": "bidang SR belum dipilih"
 }

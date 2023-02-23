@@ -17,7 +17,7 @@ class CustomerReqE extends Equatable {
   final String? photo;
   final String? rst;
   final String? sl;
-  final double? sr;
+  final int? sr;
   final double? standAkhir;
   final String? surveyZoneTime;
   final String? tanggalSurvey;

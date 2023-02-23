@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geolocator_platform_interface/src/models/position.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:surveyami/src/feature/substation/substation.survey/data/entity/request/substation.req.e.dart';
 import 'package:surveyami/src/util/time.util.dart';
 
@@ -79,7 +79,7 @@ class SubStationSurveyState extends Cubit<MainState> {
   void saveSurvey(Position position) async {
     emit(LoadState());
 
-    var uploadPhoto = await fileRepo.postMinioUpload(dataReq!.nomorGardu!, localPhotoPath!);
+    var uploadPhoto = await fileRepo.postMinioUpload(dataReq!.nomorGardu!, localPhotoPath!, 'GARDU');
     uploadPhoto.fold(
       (failure) {
         if (Failure.isUnauthorized(failure.error)) {

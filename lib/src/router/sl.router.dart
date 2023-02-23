@@ -64,5 +64,5 @@ Future<void> init(Config config) async {
   sl.registerLazySingleton<LocationState>(() => LocationState());
   sl.registerFactory<TrafoState>(() => TrafoState());
   sl.registerFactory<SubStationSurveyState>(() => SubStationSurveyState(sl(), sl(), sl()));
-  sl.registerFactory<CustomerSurveyState>(() => CustomerSurveyState(sl(), sl()));
+  sl.registerFactory<CustomerSurveyState>(() => CustomerSurveyState(sl(), sl(), sl()));
 }

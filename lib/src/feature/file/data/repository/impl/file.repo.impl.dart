@@ -12,8 +12,8 @@ class FileRepoImpl implements FileRepo {
   FileRepoImpl(this.surveyAmiApi);
 
   @override
-  Future<Either<Failure, String?>> postMinioUpload(String id, String filePath) async {
-    var source = await surveyAmiApi.postMinioUpload(id, filePath);
+  Future<Either<Failure, String?>> postMinioUpload(String id, String filePath, String photo) async {
+    var source = await surveyAmiApi.postMinioUpload(id, filePath, photo);
     return source.fold(
       (failure) => left(failure),
       (source) {

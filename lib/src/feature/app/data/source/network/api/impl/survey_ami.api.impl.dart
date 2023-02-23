@@ -87,8 +87,15 @@ class SurveyAmiApiImpl implements SurveyAmiApi {
   }
 
   @override
-  Future<Either<Failure, Response>> postMinioUpload(String id, String filePath) async {
-    var formData = FormData.fromMap({'id': id, 'file': await MultipartFile.fromFile(filePath, filename: basename(filePath))});
+  Future<Either<Failure, Response>> postMinioUpload(String id, String filePath, String photo) async {
+    var formData = FormData.fromMap({
+      'file': await MultipartFile.fromFile(
+        filePath,
+        filename: basename(filePath),
+      ),
+      'id': id,
+      'photo': photo,
+    });
 
     return call(clientWithToken.post(pathPostMinioUpload, data: formData));
   }

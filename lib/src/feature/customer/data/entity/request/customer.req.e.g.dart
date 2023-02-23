@@ -27,7 +27,7 @@ abstract class _$CustomerReqECWProxy {
 
   CustomerReqE sl(String? sl);
 
-  CustomerReqE sr(double? sr);
+  CustomerReqE sr(int? sr);
 
   CustomerReqE standAkhir(double? standAkhir);
 
@@ -52,7 +52,7 @@ abstract class _$CustomerReqECWProxy {
     String? photo,
     String? rst,
     String? sl,
-    double? sr,
+    int? sr,
     double? standAkhir,
     String? surveyZoneTime,
     String? tanggalSurvey,
@@ -96,7 +96,7 @@ class _$CustomerReqECWProxyImpl implements _$CustomerReqECWProxy {
   CustomerReqE sl(String? sl) => this(sl: sl);
 
   @override
-  CustomerReqE sr(double? sr) => this(sr: sr);
+  CustomerReqE sr(int? sr) => this(sr: sr);
 
   @override
   CustomerReqE standAkhir(double? standAkhir) => this(standAkhir: standAkhir);
@@ -175,7 +175,7 @@ class _$CustomerReqECWProxyImpl implements _$CustomerReqECWProxy {
       sr: sr == const $CopyWithPlaceholder()
           ? _value.sr
           // ignore: cast_nullable_to_non_nullable
-          : sr as double?,
+          : sr as int?,
       standAkhir: standAkhir == const $CopyWithPlaceholder()
           ? _value.standAkhir
           // ignore: cast_nullable_to_non_nullable

@@ -27,7 +27,7 @@ abstract class _$CustomerReqCWProxy {
 
   CustomerReq sl(String? sl);
 
-  CustomerReq sr(double? sr);
+  CustomerReq sr(int? sr);
 
   CustomerReq standAkhir(double? standAkhir);
 
@@ -52,7 +52,7 @@ abstract class _$CustomerReqCWProxy {
     String? photo,
     String? rst,
     String? sl,
-    double? sr,
+    int? sr,
     double? standAkhir,
     String? surveyZoneTime,
     String? tanggalSurvey,
@@ -96,7 +96,7 @@ class _$CustomerReqCWProxyImpl implements _$CustomerReqCWProxy {
   CustomerReq sl(String? sl) => this(sl: sl);
 
   @override
-  CustomerReq sr(double? sr) => this(sr: sr);
+  CustomerReq sr(int? sr) => this(sr: sr);
 
   @override
   CustomerReq standAkhir(double? standAkhir) => this(standAkhir: standAkhir);
@@ -175,7 +175,7 @@ class _$CustomerReqCWProxyImpl implements _$CustomerReqCWProxy {
       sr: sr == const $CopyWithPlaceholder()
           ? _value.sr
           // ignore: cast_nullable_to_non_nullable
-          : sr as double?,
+          : sr as int?,
       standAkhir: standAkhir == const $CopyWithPlaceholder()
           ? _value.standAkhir
           // ignore: cast_nullable_to_non_nullable
@@ -213,7 +213,7 @@ CustomerReq _$CustomerReqFromJson(Map<String, dynamic> json) => CustomerReq(
       photo: json['photo'] as String?,
       rst: json['rst'] as String?,
       sl: json['sl'] as String?,
-      sr: (json['sr'] as num?)?.toDouble(),
+      sr: json['sr'] as int?,
       standAkhir: (json['standAkhir'] as num?)?.toDouble(),
       surveyZoneTime: json['surveyZoneTime'] as String?,
       tanggalSurvey: json['tanggalSurvey'] as String?,

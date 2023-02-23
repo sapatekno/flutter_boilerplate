@@ -57,5 +57,13 @@
   "surveyMustAttachPhotoMessage": "the survey must attach a photo",
   "taggingDataCannotEmptyMessage": "tagging data cannot be empty",
   "substation": "substation",
-  "customer": "customer"
+  "customer": "customer",
+  "meterBrand": "meter brand",
+  "meterNumber": "meter number",
+  "rst": "rst",
+  "sl": "sl",
+  "sr": "sr",
+  "finalStand": "final stand",
+  "rstMustSelected": "the RST field has not been selected",
+  "srMustSelected": "the SR field has not been selected"
 }

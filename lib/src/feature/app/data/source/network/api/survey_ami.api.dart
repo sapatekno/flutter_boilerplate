@@ -18,5 +18,5 @@ abstract class SurveyAmiApi extends Api {
 
   Future<Either<Failure, Response>> postPelangganTagging(CustomerReq data);
 
-  Future<Either<Failure, Response>> postMinioUpload(String id, String filePath);
+  Future<Either<Failure, Response>> postMinioUpload(String id, String filePath, String photo);
 }
