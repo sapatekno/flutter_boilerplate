@@ -85,10 +85,10 @@ packages:
     dependency: transitive
     description:
       name: build_daemon
-      sha256: "6bc5544ea6ce4428266e7ea680e945c68806c4aae2da0eb5e9ccf38df8d6acbf"
+      sha256: "757153e5d9cd88253cb13f28c2fb55a537dc31fefd98137549895b5beb7c6169"
       url: "https://pub.dev"
     source: hosted
-    version: "3.1.0"
+    version: "3.1.1"
   build_resolvers:
     dependency: transitive
     description:
@@ -189,18 +189,18 @@ packages:
     dependency: "direct main"
     description:
       name: copy_with_extension
-      sha256: "4ee6eabd76ff3c8fc1f7add9f64afdb5f24de70c48d609aae8c4978a04695a1d"
+      sha256: "6e4ce4297917d7987f45200f3c60b8e24cc978505e30d746b87b6988527ef18d"
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.0"
+    version: "5.0.1"
   copy_with_extension_gen:
     dependency: "direct dev"
     description:
       name: copy_with_extension_gen
-      sha256: "1e76acad4e7cc3194e861cfe7d4e407d7d1c3e43a1cc3e23be198c9fce3b1e1b"
+      sha256: "7a028ea4092d8982bb218db21b587d0f96115693a57ed512161f9de665ed8c47"
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.0"
+    version: "5.0.1"
   cross_file:
     dependency: transitive
     description:
@@ -353,10 +353,10 @@ packages:
     dependency: "direct main"
     description:
       name: form_builder_validators
-      sha256: e4d54c0c513e3e36ae4e4905994873a0a907585407212effeef39a68e759670c
+      sha256: d0a940d77231723fcb203ad6f5319ff30cd0c4412a6e74d29d826957b1f9afe0
       url: "https://pub.dev"
     source: hosted
-    version: "8.4.0"
+    version: "8.5.0"
   frontend_server_client:
     dependency: transitive
     description:
@@ -1004,4 +1004,4 @@ packages:
     version: "3.1.1"
 sdks:
   dart: ">=2.19.0 <3.0.0"
-  flutter: ">=3.3.0"
+  flutter: ">=3.7.0"
