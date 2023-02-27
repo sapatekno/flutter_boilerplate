@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_local.dart';
 import 'package:go_router_flow/go_router_flow.dart';
-import 'package:surveyami/src/feature/app/presenter/widget/dialog.widget.dart';
-import 'package:surveyami/src/feature/customer/customer.survey/presenter/page/customer_survey.page.dart';
-import 'package:surveyami/src/feature/substation/substation.survey/presenter/page/substation_survey.page.dart';
 import 'package:surveyami/src/util/string.util.dart';
 
 import '../../../../router/go.router.dart';
 import '../../../../router/sl.router.dart';
 import '../../../app/data/session/session.dart';
+import '../../../app/presenter/widget/dialog.widget.dart';
+import '../../../customer/customer.survey/presenter/page/customer_survey.page.dart';
+import '../../../substation/substation.survey/presenter/page/substation_survey.page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,17 +19,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
-
   List<HomeData> listHomeData = [];
-
-  @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      /// * Used only for debugging
-    });
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,15 +1,12 @@
 import 'package:dio/dio.dart';
-
-import '../../../../../../util/alice.util.dart';
+import 'package:dio_log/dio_log.dart';
 
 class HttpClient {
-  final AliceUtil aliceUtil;
-
-  HttpClient(this.aliceUtil);
+  HttpClient();
 
   Dio get client {
     Dio dio = Dio(_getOptions());
-    dio.interceptors.add(aliceUtil.instance.getDioInterceptor());
+    dio.interceptors.add(DioLogInterceptor());
 
     return dio;
   }

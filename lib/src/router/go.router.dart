@@ -7,7 +7,6 @@ import '../feature/home/presenter/page/home.page.dart';
 import '../feature/substation/substation.survey/data/entity/request/substation_detail.req.e.dart';
 import '../feature/substation/substation.trafo/presenter/page/trafo.form.page.dart';
 import '../feature/substation/substation.trafo/presenter/page/trafo.page.dart';
-import 'sl.router.dart';
 
 String pathInitial = '/';
 String pathHome = '/home';
@@ -17,11 +16,10 @@ String pathTrafoForm = '/trafo/form';
 String pathPhotoViewer = '/photo/view';
 
 final goRouter = GoRouter(
-  navigatorKey: sl.get<GlobalKey<NavigatorState>>(),
   routes: [
     GoRoute(
       path: pathInitial,
-      builder: (context, state) => const LoginPage(),
+      builder: (context, state) => LoginPage(),
     ),
     GoRoute(
       path: pathHome,

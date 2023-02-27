@@ -25,13 +25,11 @@ class LoginState extends Cubit<MainState> {
     /// * Cek koneksi internet client
     if (!await internet.hasConnection()) {
       await Future.delayed(const Duration(seconds: 1));
-      emit(DataState(true));
       emit(FailState(Failure.failNoInternet()));
       return;
     }
 
     /// * Cek jika user sudah login (ada data, termasuk token) pindah ke halaman utama
-    var user = session.user;
     if (session.user == null) {
       emit(DataState(true));
     } else {

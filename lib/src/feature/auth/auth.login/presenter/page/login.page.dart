@@ -15,25 +15,12 @@ import '../../../../app/presenter/widget/failure.widget.dart';
 import '../../../../app/presenter/widget/loading.widget.dart';
 import '../state/login.state.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
-
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  @override
-  void initState() {
-    super.initState();
-  }
+class LoginPage extends StatelessWidget {
+  LoginPage({Key? key}) : super(key: key);
 
   final formKey = GlobalKey<FormState>();
-
   final loginState = sl.get<LoginState>();
-
   final userController = TextEditingController();
-
   final passController = TextEditingController();
 
   @override
@@ -196,5 +183,4 @@ class _LoginPageState extends State<LoginPage> {
       context.go(pathHome);
     }
   }
-
 }

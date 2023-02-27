@@ -12,12 +12,11 @@ dependencies:
   flutter:
     sdk: flutter
 
-  alice: ^0.3.2
-  catcher: ^0.7.0
   cupertino_icons: ^1.0.5
   copy_with_extension: ^5.0.0
   dartz: ^0.10.1
   dio: any
+  dio_log: ^2.0.4
   encrypt: ^5.0.1
   equatable: ^2.0.5
   flutter_bloc: ^8.1.2
@@ -34,7 +33,6 @@ dependencies:
   path: any
   photo_view: ^0.14.0
   json_annotation: ^4.8.0
-  safe_device: ^1.1.2
   shared_preferences: ^2.0.18
   sizer: ^2.0.15
 
@@ -57,4 +55,3 @@ flutter:
   assets:
     - assets/
     - assets/lottiefiles/
-
