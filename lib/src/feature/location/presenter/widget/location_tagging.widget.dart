@@ -41,9 +41,9 @@ class LocationTaggingWidget extends StatelessWidget {
                         options: MapOptions(
                           interactiveFlags: InteractiveFlag.all & ~InteractiveFlag.rotate & ~InteractiveFlag.doubleTapZoom,
                           center: LatLng(cubit.currentPosition!.latitude, cubit.currentPosition!.longitude),
-                          minZoom: 16,
-                          zoom: 17,
-                          maxZoom: 18,
+                          minZoom: 15,
+                          zoom: 16,
+                          maxZoom: 17,
                         ),
                         children: [
                           TileLayer(
@@ -159,7 +159,7 @@ class LocationTaggingWidget extends StatelessWidget {
     if (cubit.currentPosition != null) {
       /// ? Give time to MapView Render First
       Future.delayed(const Duration(milliseconds: 500)).then((value) {
-        mapController.move(LatLng(cubit.currentPosition!.latitude, cubit.currentPosition!.longitude), 17);
+        mapController.move(LatLng(cubit.currentPosition!.latitude, cubit.currentPosition!.longitude), 16);
       });
     }
 
