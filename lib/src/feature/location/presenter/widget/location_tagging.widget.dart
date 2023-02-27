@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_local.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:sizer/sizer.dart';
 import 'package:surveyami/src/feature/app/presenter/widget/dialog.widget.dart';
 import 'package:surveyami/src/util/string.util.dart';
@@ -14,13 +16,14 @@ import '../state/location.state.dart';
 class LocationTaggingWidget extends StatelessWidget {
   LocationTaggingWidget({Key? key}) : super(key: key);
 
-  final locationState = sl.get<LocationState>();
+  final cubit = sl.get<LocationState>();
+  final mapController = MapController();
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LocationState, MainState>(
-      bloc: locationState..initState(),
-      listenWhen: (prev, current) => current is AlertState,
+      bloc: cubit..initState(),
+      listenWhen: (prev, current) => current is AlertState || current is DataState,
       listener: (context, state) => onListener(context, state),
       builder: (context, state) {
         return Card(
@@ -29,13 +32,42 @@ class LocationTaggingWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ListTile(
-                leading: Icon(Icons.map, color: Theme.of(context).primaryColor),
-                title: Text(
-                  AppLocalizations.of(context)!.dataTagging.toTitleCase(),
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-              ),
+              cubit.currentPosition != null
+                  ? SizedBox(
+                      width: double.maxFinite,
+                      height: 15.h,
+                      child: FlutterMap(
+                        mapController: mapController,
+                        options: MapOptions(
+                          interactiveFlags: InteractiveFlag.all & ~InteractiveFlag.rotate & ~InteractiveFlag.doubleTapZoom,
+                          center: LatLng(cubit.currentPosition!.latitude, cubit.currentPosition!.longitude),
+                          minZoom: 16,
+                          zoom: 17,
+                          maxZoom: 18,
+                        ),
+                        children: [
+                          TileLayer(
+                            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                            userAgentPackageName: 'id.co.plniconplus',
+                          ),
+                          MarkerLayer(
+                            markers: [
+                              Marker(
+                                point: LatLng(cubit.currentPosition!.latitude, cubit.currentPosition!.longitude),
+                                builder: (context) => Icon(Icons.location_on, color: Theme.of(context).primaryColor),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
+                  : ListTile(
+                      leading: Icon(Icons.map, color: Theme.of(context).primaryColor),
+                      title: Text(
+                        AppLocalizations.of(context)!.dataTagging.toTitleCase(),
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      ),
+                    ),
               Padding(
                 padding: EdgeInsets.all(3.w),
                 child: Table(
@@ -54,7 +86,7 @@ class LocationTaggingWidget extends StatelessWidget {
                           child: const Text(" :", style: TextStyle(height: 2)),
                         ),
                         Text(
-                          locationState.currentPosition != null ? locationState.currentPosition!.latitude.toString() : '-',
+                          cubit.currentPosition != null ? cubit.currentPosition!.latitude.toString() : '-',
                           style: const TextStyle(height: 2),
                         ),
                       ],
@@ -72,7 +104,7 @@ class LocationTaggingWidget extends StatelessWidget {
                           child: const Text(" :", style: TextStyle(height: 2)),
                         ),
                         Text(
-                          locationState.currentPosition != null ? locationState.currentPosition!.longitude.toString() : '-',
+                          cubit.currentPosition != null ? cubit.currentPosition!.longitude.toString() : '-',
                           style: const TextStyle(height: 2),
                         ),
                       ],
@@ -90,7 +122,7 @@ class LocationTaggingWidget extends StatelessWidget {
                           child: const Text(" :", style: TextStyle(height: 2)),
                         ),
                         Text(
-                          locationState.currentPosition != null ? '${locationState.currentPosition!.accuracy.toStringAsFixed(2)}m' : '-',
+                          cubit.currentPosition != null ? '${cubit.currentPosition!.accuracy.toStringAsFixed(2)}m' : '-',
                           style: const TextStyle(height: 2),
                         ),
                       ],
@@ -108,7 +140,7 @@ class LocationTaggingWidget extends StatelessWidget {
                         buildWhen: (prev, current) => state is LoadState || state is DataState,
                         builder: (context, state) {
                           return ElevatedButton.icon(
-                            onPressed: state is DataState ? () => locationState.updateCurrentLocation() : null,
+                            onPressed: state is DataState ? () => cubit.updateCurrentLocation() : null,
                             icon: const Icon(Icons.refresh),
                             label: Text(state is DataState ? AppLocalizations.of(context)!.updateLocation.toTitleCase() : AppLocalizations.of(context)!.loading.toTitleCase()),
                           );
@@ -123,7 +155,14 @@ class LocationTaggingWidget extends StatelessWidget {
     );
   }
 
-  void onListener(BuildContext context, MainState state) {
+  void onListener(BuildContext context, MainState state) async {
+    if (cubit.currentPosition != null) {
+      /// ? Give time to MapView Render First
+      Future.delayed(const Duration(milliseconds: 500)).then((value) {
+        mapController.move(LatLng(cubit.currentPosition!.latitude, cubit.currentPosition!.longitude), 17);
+      });
+    }
+
     if (state is AlertState<Failure>) {
       String description = AppLocalizations.of(context)!.noData;
       if (state.data.message != null) description = Failure.getMessage(context, state.data.message!);
