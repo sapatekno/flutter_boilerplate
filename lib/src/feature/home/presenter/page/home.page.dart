@@ -42,12 +42,12 @@ class _HomePageState extends State<HomePage> {
             icon: const Icon(Icons.logout),
             onPressed: () {
               showConfirmDialog(
-                context,
-                AppLocalizations.of(context)!.logout,
-                AppLocalizations.of(context)!.logoutConfirmation,
-                AppLocalizations.of(context)!.yes,
-                AppLocalizations.of(context)!.no,
-                () async {
+                context: context,
+                title: AppLocalizations.of(context)!.logout,
+                description: AppLocalizations.of(context)!.logoutConfirmation,
+                confirmBtnTxt: AppLocalizations.of(context)!.yes,
+                cancelBtnTxt: AppLocalizations.of(context)!.no,
+                onConfirmClicked: () async {
                   var session = sl.get<Session>();
                   await session.remove();
                   context.go(pathInitial);

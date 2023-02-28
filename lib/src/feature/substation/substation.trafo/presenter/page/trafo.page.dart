@@ -102,12 +102,11 @@ class _TrafoPageState extends State<TrafoPage> {
                                   icon: const Icon(Icons.delete, color: Colors.red),
                                   onPressed: () {
                                     showConfirmDialog(
-                                      context,
-                                      null,
-                                      AppLocalizations.of(context)!.deleteConfirmation,
-                                      AppLocalizations.of(context)!.yes,
-                                      AppLocalizations.of(context)!.no,
-                                      () {
+                                      context: context,
+                                      description: AppLocalizations.of(context)!.deleteConfirmation,
+                                      confirmBtnTxt: AppLocalizations.of(context)!.yes,
+                                      cancelBtnTxt: AppLocalizations.of(context)!.no,
+                                      onConfirmClicked: () {
                                         setState(() {
                                           listTrafoData.removeAt(index);
                                           listTrafoData.sort((a, b) => (a.nomorTrafo ?? 'a').compareTo((b.nomorTrafo ?? 'b')));

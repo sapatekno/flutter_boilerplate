@@ -102,12 +102,11 @@ class _TrafoFormPageState extends State<TrafoFormPage> {
           onPressed: () {
             if (formKey.currentState!.validate()) {
               showConfirmDialog(
-                context,
-                null,
-                AppLocalizations.of(context)!.saveConfirmation,
-                AppLocalizations.of(context)!.yes,
-                AppLocalizations.of(context)!.no,
-                () {
+                context: context,
+                description: AppLocalizations.of(context)!.saveConfirmation,
+                confirmBtnTxt: AppLocalizations.of(context)!.yes,
+                cancelBtnTxt: AppLocalizations.of(context)!.no,
+                onConfirmClicked: () {
                   var trafoData = SubStationDetailReqE(
                     jumlahSaluran: int.parse(numberOfChannelController.text),
                     kapasitasTrafo: int.parse(trafoCapacityController.text),

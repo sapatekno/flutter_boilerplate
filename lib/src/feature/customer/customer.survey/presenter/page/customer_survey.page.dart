@@ -90,11 +90,9 @@ class CustomerSurveyPage extends StatelessWidget {
                             if (srController.selectedIndex == null) errorMessage = AppLocalizations.of(context)!.srMustSelected;
                             if (errorMessage != null) {
                               showInfoDialog(
-                                context,
-                                null,
-                                errorMessage,
-                                AppLocalizations.of(context)!.ok,
-                                null,
+                                context: context,
+                                description: errorMessage,
+                                confirmBtnTxt: AppLocalizations.of(context)!.ok,
                               );
                               return;
                             }
@@ -114,12 +112,11 @@ class CustomerSurveyPage extends StatelessWidget {
                             selectedSR = srController.selectedIndex! + 1;
 
                             showConfirmDialog(
-                              context,
-                              null,
-                              AppLocalizations.of(context)!.saveConfirmation,
-                              AppLocalizations.of(context)!.yes,
-                              AppLocalizations.of(context)!.no,
-                              () {
+                              context: context,
+                              description: AppLocalizations.of(context)!.saveConfirmation,
+                              confirmBtnTxt: AppLocalizations.of(context)!.yes,
+                              cancelBtnTxt: AppLocalizations.of(context)!.no,
+                              onConfirmClicked: () {
                                 cubit.saveSurvey(
                                   position: cubitLocation.currentPosition!,
                                   meterBrand: meterBrandController.text,
@@ -130,9 +127,9 @@ class CustomerSurveyPage extends StatelessWidget {
                                   finalStand: double.parse(finalStandController.text),
                                 );
                               },
-                      );
-                    }
-                  },
+                            );
+                          }
+                        },
                   icon: const Icon(Icons.save_alt),
                   label: Text(
                     AppLocalizations.of(context)!.save.toTitleCase(),
@@ -170,31 +167,26 @@ class CustomerSurveyPage extends StatelessWidget {
     if (state is AlertState<Failure>) {
       var failure = state.data;
       showInfoDialog(
-        context,
-        null,
-        Failure.getMessage(context, failure.message ?? "unknownError"),
-        AppLocalizations.of(context)!.ok,
-        null,
+        context: context,
+        description: Failure.getMessage(context, failure.message ?? "unknownError"),
+        confirmBtnTxt: AppLocalizations.of(context)!.ok,
       );
     }
 
     if (state is AlertState<String>) {
       showInfoDialog(
-        context,
-        null,
-        Failure.getMessage(context, state.data),
-        AppLocalizations.of(context)!.ok,
-        null,
+        context: context,
+        description: Failure.getMessage(context, state.data),
+        confirmBtnTxt: AppLocalizations.of(context)!.ok,
       );
     }
 
     if (state is UnauthorizedState) {
       showInfoDialog(
-        context,
-        null,
-        AppLocalizations.of(context)!.unauthorizedMessage,
-        AppLocalizations.of(context)!.login,
-            () async {
+        context: context,
+        description: AppLocalizations.of(context)!.unauthorizedMessage,
+        confirmBtnTxt: AppLocalizations.of(context)!.login,
+        onConfirmClicked: () async {
           var session = sl.get<Session>();
           await session.remove();
           context.go(pathInitial);
@@ -216,18 +208,28 @@ class CustomerSurveyPage extends StatelessWidget {
             if (cubit.dataRes == null) {
               if (customerSearchController.text.isEmpty) {
                 /// * Alert data tidak boleh kosong
-                showInfoDialog(context, null, AppLocalizations.of(context)!.dataCannotEmptyMessage, AppLocalizations.of(context)!.ok, null);
+                showInfoDialog(
+                  context: context,
+                  description: AppLocalizations.of(context)!.dataCannotEmptyMessage,
+                  confirmBtnTxt: AppLocalizations.of(context)!.ok,
+                );
               } else {
                 /// * Lakukan pencarian data
                 cubit.getCustomerById(customerSearchController.text);
               }
             } else {
               /// * Confirm reset data
-              showConfirmDialog(context, null, AppLocalizations.of(context)!.resetConfirmationMessage, AppLocalizations.of(context)!.yes, AppLocalizations.of(context)!.cancel, () {
-                cubit.initState();
-                customerSearchController.text = '';
-                customerSearchFocus.requestFocus();
-              });
+              showConfirmDialog(
+                context: context,
+                description: AppLocalizations.of(context)!.resetConfirmationMessage,
+                confirmBtnTxt: AppLocalizations.of(context)!.yes,
+                cancelBtnTxt: AppLocalizations.of(context)!.cancel,
+                onConfirmClicked: () {
+                  cubit.initState();
+                  customerSearchController.text = '';
+                  customerSearchFocus.requestFocus();
+                },
+              );
             }
           },
           icon: Icon(

@@ -48,6 +48,7 @@ class LoginPage extends StatelessWidget {
                 children: [
                   SizedBox(height: 4.h),
                   blockLogin(context),
+
                   /// * hide because no register feature # blockRegister(context),
                 ],
               ),
@@ -171,11 +172,9 @@ class LoginPage extends StatelessWidget {
         description = Failure.getMessage(context, state.data.message!);
       }
       showInfoDialog(
-        context,
-        null,
-        description,
-        AppLocalizations.of(context)!.ok,
-        null,
+        context: context,
+        description: description,
+        confirmBtnTxt: AppLocalizations.of(context)!.ok,
       );
     }
 

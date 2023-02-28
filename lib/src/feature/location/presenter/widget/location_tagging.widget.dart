@@ -168,12 +168,11 @@ class LocationTaggingWidget extends StatelessWidget {
       if (state.data.message != null) description = Failure.getMessage(context, state.data.message!);
 
       showConfirmDialog(
-        context,
-        null,
-        description,
-        state.data.message == 'failNoLocationService' ? AppLocalizations.of(context)!.openLocationSettings : AppLocalizations.of(context)!.openApplicationSettings,
-        AppLocalizations.of(context)!.cancel,
-        () => state.data.message == 'failNoLocationService' ? Geolocator.openLocationSettings() : Geolocator.openAppSettings(),
+        context: context,
+        description: description,
+        confirmBtnTxt: state.data.message == 'failNoLocationService' ? AppLocalizations.of(context)!.openLocationSettings : AppLocalizations.of(context)!.openApplicationSettings,
+        cancelBtnTxt: AppLocalizations.of(context)!.cancel,
+        onConfirmClicked: () => state.data.message == 'failNoLocationService' ? Geolocator.openLocationSettings() : Geolocator.openAppSettings(),
       );
     }
   }

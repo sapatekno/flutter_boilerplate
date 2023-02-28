@@ -1,81 +1,70 @@
 import 'package:flutter/material.dart';
 import 'package:surveyami/src/util/string.util.dart';
 
-showConfirmDialog(
-  BuildContext context,
+showConfirmDialog({
+  required BuildContext context,
   String? title,
-  String description,
-  String confirmBtnTxt,
-  String cancelBtnTxt,
-  Function onConfirmClicked,
-) {
-  // set up the buttons
+  required String description,
+  required String confirmBtnTxt,
+  required String cancelBtnTxt,
+  required Function onConfirmClicked,
+}) {
+  /// * Cancel Button Like Cancel or No
   Widget cancelButton = TextButton(
-    child: Text(
-      cancelBtnTxt.toTitleCase(),
-      style: const TextStyle(color: Colors.red),
-    ),
-    onPressed: () {
-      Navigator.of(context).pop(); // dismiss dialog
-    },
+    child: Text(cancelBtnTxt.toTitleCase(), style: const TextStyle(color: Colors.red)),
+    onPressed: () => Navigator.of(context).pop(),
   );
+
+  /// ? Confirm Button Like Yes or Confirm
   Widget confirmButton = ElevatedButton(
     child: Text(confirmBtnTxt.toTitleCase()),
     onPressed: () {
       onConfirmClicked.call();
-      Navigator.of(context).pop(); // dismiss dialog
+      Navigator.of(context).pop();
     },
   );
-  // set up the AlertDialog
+
+  /// * Setup Dialog
   AlertDialog alert = AlertDialog(
     title: title == null ? null : Text(title.toTitleCase(), style: const TextStyle(fontWeight: FontWeight.bold)),
-    content: Text(description.toCapitalize()),
-    actions: [
-      cancelButton,
-      confirmButton,
-    ],
+    content: Text(description.toCapitalize(), style: const TextStyle(height: 1.5)),
+    actions: [cancelButton, confirmButton],
   );
-  // show the dialog
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return alert;
-    },
-  );
+
+  /// * Show Dialog
+  _showDialog(context: context, builder: (context) => alert);
 }
 
-showInfoDialog(
-  BuildContext context,
+showInfoDialog({
+  required BuildContext context,
   String? title,
-  String description,
-  String confirmBtnTxt,
+  required String description,
+  required String confirmBtnTxt,
   Function? onConfirmClicked,
-) {
-  // set up the buttons
-
+}) {
+  /// * Confirm Button Like Yes or Confirm
   Widget confirmButton = ElevatedButton(
     child: Text(confirmBtnTxt.toTitleCase()),
     onPressed: () {
       if (onConfirmClicked != null) onConfirmClicked.call();
-      Navigator.of(context).pop(); // dismiss dialog
+      Navigator.of(context).pop();
     },
   );
-  // set up the AlertDialog
+
+  /// * Setup Dialog
   AlertDialog alert = AlertDialog(
     title: title == null ? null : Text(title.toTitleCase(), style: const TextStyle(fontWeight: FontWeight.bold)),
-    content: Text(
-      description.toCapitalize(),
-      style: const TextStyle(height: 1.5),
-    ),
-    actions: [
-      confirmButton,
-    ],
+    content: Text(description.toCapitalize(), style: const TextStyle(height: 1.5)),
+    actions: [confirmButton],
   );
-  // show the dialog
-  showDialog(
+
+  /// *  Show the dialog
+  _showDialog(context: context, builder: (context) => alert);
+}
+
+_showDialog({required BuildContext context, required WidgetBuilder builder}) {
+  return showDialog(
     context: context,
-    builder: (BuildContext context) {
-      return alert;
-    },
+    builder: builder,
   );
 }
