@@ -15,19 +15,33 @@ import '../../../../app/presenter/widget/failure.widget.dart';
 import '../../../../app/presenter/widget/loading.widget.dart';
 import '../state/login.state.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final formKey = GlobalKey<FormState>();
   final loginState = sl.get<LoginState>();
-  final userController = TextEditingController();
   final passController = TextEditingController();
+  final userController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      loginState.getToken();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocConsumer<LoginState, MainState>(
-        bloc: loginState..getToken(),
+        bloc: loginState,
         listenWhen: (prev, current) => current is AlertState || current is GoToHomeState,
         listener: (context, state) => onListener(context, state),
         buildWhen: (prev, state) => state is LoadState || state is DataState<bool> || state is FailState,
@@ -35,9 +49,10 @@ class LoginPage extends StatelessWidget {
           if (state is LoadState) return const LoadingWidget();
 
           if (state is FailState) {
-            return FailureWidget(state.failure.message ?? '', () {
-              loginState.getToken();
-            });
+            return FailureWidget(
+              message: state.failure.message ?? '',
+              callback: () => loginState.getToken(),
+            );
           }
 
           if (state is DataState<bool>) {
@@ -49,7 +64,8 @@ class LoginPage extends StatelessWidget {
                   SizedBox(height: 4.h),
                   blockLogin(context),
 
-                  /// * hide because no register feature # blockRegister(context),
+                  /// * hide because no register feature
+                  /// * blockRegister(context),
                 ],
               ),
             );

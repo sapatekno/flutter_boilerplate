@@ -11,7 +11,11 @@ class FailureWidget extends StatelessWidget {
 
   final void Function() callback;
 
-  const FailureWidget(this.message, this.callback, {Key? key}) : super(key: key);
+  const FailureWidget({
+    required this.message,
+    required this.callback,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
