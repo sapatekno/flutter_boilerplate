@@ -65,5 +65,6 @@
   "sr": "sr",
   "finalStand": "stand akhir",
   "rstMustSelected": "bidang RST belum dipilih",
-  "srMustSelected": "bidang SR belum dipilih"
+  "srMustSelected": "bidang SR belum dipilih",
+  "error": "error"
 }

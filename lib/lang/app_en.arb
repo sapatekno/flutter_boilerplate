@@ -65,5 +65,6 @@
   "sr": "sr",
   "finalStand": "final stand",
   "rstMustSelected": "the RST field has not been selected",
-  "srMustSelected": "the SR field has not been selected"
+  "srMustSelected": "the SR field has not been selected",
+  "error": "error"
 }
