@@ -1,3 +1,4 @@
+import 'package:dio_log/dio_log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_local.dart';
@@ -33,6 +34,12 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      /// * Display overlay button for debugging.
+      showDebugBtn(
+        context,
+        btnColor: Theme.of(context).primaryColor,
+      );
+
       loginState.getToken();
     });
   }
